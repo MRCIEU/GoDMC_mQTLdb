@@ -977,15 +977,16 @@
 /* Banner */
 
 	#banner {
-		background-color: #666666;
-		background-image: url("../images/banner.jpg");
+		background-color: #000;
+		background-image: url("../images/dna.jpg");
 		background-size: cover;
 		background-position: center center;
 		background-repeat: no-repeat;
-		color: #d8d8d8;
+		/*color: #d8d8d8;*/
 		padding: 14em 0;
 		text-align: center;
 		position: relative;
+		opacity: 1;
 	}
 
 		#banner:before {
@@ -1008,7 +1009,8 @@
 			}
 
 		#banner h2, #banner h3, #banner h4, #banner h5, #banner h6 {
-			color: #ffffff;
+			color: #fff;
+			font-weight: bold;
 		}
 
 		#banner .button.alt {
@@ -1041,7 +1043,9 @@
 
 		#banner p {
 			font-size: 1.5em;
-			margin-bottom: 2em;
+			width: 50%;
+			margin: 0 auto 2em auto;
+			color: #fff;
 		}
 
 			#banner p a {

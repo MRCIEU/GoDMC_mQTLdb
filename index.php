@@ -17,7 +17,7 @@ include 'header.php';
 		                </span>
 		            </div>
 		            <div class="examples">
-		                Examples:
+		                Example searches:
 		                <a href="/mqtldb/search-results.php?query=rs7105015" data-original-title="" title="">rs7105015</a>,
 		                <a href="/mqtldb/search-results.php?query=cg24851651" data-original-title="" title="">cg24851651</a>,
 		                <a href="/mqtldb/search-results.php?query=6:16000000-25000000" data-original-title="" title="">6:16000000-25000000</a>

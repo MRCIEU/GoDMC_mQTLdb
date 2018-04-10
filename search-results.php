@@ -9,7 +9,16 @@
 			<section id="main" class="wrapper style1">
 				<header class="major">
 					<h2>GoDMC Search</h2>
-					<p><strong>Results for </strong> <?php echo ($_GET['query'] ?: "''"); ?></p>
+					<p><strong>Results for </strong> 
+						<?php 
+						if (isset($_GET['query']) && $_GET['query'] != '') {
+							echo $_GET['query'];
+						} else {
+							
+							echo '<em>no search term</em>';
+						}
+						?>
+					</p>
 				</header>
 				<div class="container">
 					<section>
@@ -108,6 +117,12 @@
 					};
 
 					var query = getUrlParameter('query');
+					
+					// if (typeof query == 'undefined') {
+					// 	query = '';
+
+					// }
+					console.log(query);
 
 				    $('#results').DataTable( {
 				    	"processing": true,

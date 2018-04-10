@@ -26,21 +26,21 @@
 							</div>
 						</div>
 						<div class="6u">
-							<h2>GoDMC Website</h2>
+							<!-- <h2>GoDMC Website</h2> -->
 							<p>More information about GoDMC can be found on the <a href="http://godmc.org.uk/">project website</a></p>
-							<ul class="icons">
+							<!-- <ul class="icons">
 								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
 								<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-								<!-- <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 								<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li> -->
-							</ul>
+								<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+							</ul> -->
 						</div>
 					</div>
 					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li>
-						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
-						<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+						<li>&copy; 2018. All rights reserved.</li>
+						<li>Website: <a href="http://templated.co">TEMPLATED</a> | <a href="http://pjsweb.uk">PJSWeb</a></li>
+						
 					</ul>
 				</div>
 			</footer>

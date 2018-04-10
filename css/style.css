@@ -49,14 +49,14 @@
 		font-weight: 300;
 		line-height: 1em;
 		margin: 0 0 1em 0;
-		text-transform: uppercase;
+		text-transform: none;
 		letter-spacing: 0.125em;
 	}
 
-		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-			color: inherit;
-			text-decoration: none;
-		}
+	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+		color: inherit;
+		text-decoration: none;
+	}
 
 	h2 {
 		font-size: 1.5em;
@@ -978,7 +978,8 @@
 
 	#banner {
 		background-color: #fff;
-		background-image: url("../images/dna.jpg");
+		/*background-image: url("../images/dna.jpg");*/
+		background-image: url("../images/dna-1811955_1280.jpg");
 		background-size: cover;
 		background-position: center center;
 		background-repeat: no-repeat;

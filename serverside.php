@@ -1,71 +1,35 @@
 <?php
  
-/*
- * DataTables example server-side processing script.
- *
- * Please note that this script is intentionally extremely simply to show how
- * server-side processing can be implemented, and probably shouldn't be used as
- * the basis for a large complex system. It is suitable for simple use cases as
- * for learning.
- *
- * See http://datatables.net/usage/server-side for full details on the server-
- * side processing requirements of DataTables.
- *
- * @license MIT - http://datatables.net/license_mit
- */
- 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Easy set variables
- */
+// Define the SQL query parameters pending on which type of search term is used
+// e.g. an SNP name (rs123456) or CpG name (cg12345) etc.
 
-
-if (isset($_GET['query'])) {
+if (isset($_GET['query']) && $_GET['query'] != '') {
     $wherequery = '';
 
     $query = $_GET['query'];
 
-
     if (preg_match("/^rs\d+$/", $query, $output)) {
         $wherequery = "snp='".$query."'";
+        $table = 'records';
     } elseif (preg_match("/^cg\d+$/", $query, $output)) {
         $wherequery = "cpg='".$query."'";
+        $table = 'records';
     } elseif (preg_match("/^(\d+)\:(\d+)$/", $query, $output)) {
         $wherequery = '';
+        $table = 'records';
     } elseif (preg_match("/^(\d+)\:(\d+)\-(\d+)$/", $query, $output)) {
         //$wherequery = "cpg_pos='".$out."'";
         $wherequery = '';
+        $table = 'records';
     }
-error_log(print_r($output,true));
 
-
-
-
-
-
-
+} else {
+    $wherequery = '';
+    $table = 'records';
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  
-// DB table to use
-$table = 'records';
-//$table2 = 'records2';
  
 // Table's primary key
 $primaryKey = 'id';
@@ -92,44 +56,6 @@ $columns = array(
     array( 'db' => 'p_value',     'dt' => 13 ),
     array( 'db' => 'trans',     'dt' => 14 ),
 
-    // array( 'db' => 'timepoint2', 'dt' => 15 ),
-    // array( 'db' => 'snp2',  'dt' => 16 ),
-    // array( 'db' => 'snp_chr2',   'dt' => 17 ),
-    // array( 'db' => 'snp_pos2',     'dt' => 18 ),
-    // array( 'db' => 'timepoint2', 'dt' => 4 ),
-    // array( 'db' => 'snp2',  'dt' => 5 ),
-    // array( 'db' => 'snp_chr2',   'dt' => 6 ),
-    // array( 'db' => 'snp_pos2',     'dt' => 7 ),
-    // // array( 'db' => 'a12',     'dt' => 19 ),
-    // array( 'db' => 'a22',     'dt' => 20 ),
-    // array( 'db' => 'maf2',     'dt' => 21 ),
-    // array( 'db' => 'cpg2',     'dt' => 22 ),
-    // array( 'db' => 'cpg_chr2',     'dt' => 23 ),
-    // array( 'db' => 'cpg_pos2',     'dt' => 24 ),
-    // array( 'db' => 'beta2',     'dt' => 25 ),
-    // array( 'db' => 't_stat2',     'dt' => 26 ),
-    // array( 'db' => 'effect_size2',     'dt' => 27 ),
-    // array( 'db' => 'p_value2',     'dt' => 28 ),
-    // array( 'db' => 'trans2',     'dt' => 29 ),
-
-    
-    
-
-
-    // array(
-    //     'db'        => 'start_date',
-    //     'dt'        => 4,
-    //     'formatter' => function( $d, $row ) {
-    //         return date( 'jS M y', strtotime($d));
-    //     }
-    // ),
-    // array(
-    //     'db'        => 'salary',
-    //     'dt'        => 5,
-    //     'formatter' => function( $d, $row ) {
-    //         return '$'.number_format($d);
-    //     }
-    // )
 );
  
 // SQL server connection information
@@ -140,9 +66,6 @@ $sql_details = array(
     'host' => 'localhost'
 );
  
-
-
- 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * If you just want to use the basic configuration for DataTables with PHP
  * server-side, there is no need to edit below this line.
@@ -150,10 +73,6 @@ $sql_details = array(
  
 require( 'ssp.class.php' );
  
-//$wherequery = 'snp_pos=66269714';
-
-//$wherequery = '';
-
 echo json_encode(
     //SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )
     SSP::complex ( $_GET, $sql_details, $table, $primaryKey, $columns, $whereResult=null, $whereAll=$wherequery )

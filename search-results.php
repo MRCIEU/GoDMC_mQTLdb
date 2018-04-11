@@ -41,6 +41,7 @@
 				                    <th>Effect Size</th>
 				                    <th>p-value</th>
 				                    <th>Trans</th>
+				                    <th>Timepoint2</th>
 				                </tr>
 				            </thead>
 

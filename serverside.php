@@ -28,17 +28,18 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
     $query = $_GET['query'];
 
     if (preg_match("/^rs\d+$/", $query, $output)) {
-        $wherequery = "snp='".$query."'";
-        $table = 'records';
-    } elseif (preg_match("/^cg\d+$/", $query, $output)) {
-        $wherequery = "cpg='".$query."'";
-        $table = 'records';
-    } elseif (preg_match("/^(\d+)\:(\d+)$/", $query, $output)) {
-        $wherequery = "snp='rs7104570' AND id=id2";
+        $wherequery = "snp='".$output[0]."'";
         $table = 'records';
         $table2 = 'records2';
         $columns = array(
-            array( 'db' => 'timepoint', 'dt' => 0 ),
+            //array( 'db' => 'timepoint', 'dt' => 0 ),
+            array(
+                'db'        => 'timepoint',
+                'dt'        => 0,
+                'formatter' => function( $d, $row ) {
+                    return '<a class="daliance" href="">'.$d.'</span>';
+                }
+            ),
             array( 'db' => 'snp',  'dt' => 1 ),
             array( 'db' => 'snp_chr',   'dt' => 2 ),
             array( 'db' => 'snp_pos',     'dt' => 3 ),
@@ -53,7 +54,65 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
             array( 'db' => 'effect_size',     'dt' => 12 ),
             array( 'db' => 'p_value',     'dt' => 13 ),
             array( 'db' => 'trans',     'dt' => 14 ),
-            array( 'db' => 'timepoint2', 'dt' => 15 ),
+            //array( 'db' => 'timepoint2', 'dt' => 15 ),
+        );
+    } elseif (preg_match("/^cg\d+$/", $query, $output)) {
+        $wherequery = "cpg='".$output[0]."'";
+        $table = 'records';
+        $table2 = 'records2';
+        $columns = array(
+            //array( 'db' => 'timepoint', 'dt' => 0 ),
+            array(
+                'db'        => 'timepoint',
+                'dt'        => 0,
+                'formatter' => function( $d, $row ) {
+                    return '<a class="daliance" href="">'.$d.'</span>';
+                }
+            ),
+            array( 'db' => 'snp',  'dt' => 1 ),
+            array( 'db' => 'snp_chr',   'dt' => 2 ),
+            array( 'db' => 'snp_pos',     'dt' => 3 ),
+            array( 'db' => 'a1',     'dt' => 4 ),
+            array( 'db' => 'a2',     'dt' => 5 ),
+            array( 'db' => 'maf',     'dt' => 6 ),
+            array( 'db' => 'cpg',     'dt' => 7 ),
+            array( 'db' => 'cpg_chr',     'dt' => 8 ),
+            array( 'db' => 'cpg_pos',     'dt' => 9 ),
+            array( 'db' => 'beta',     'dt' => 10 ),
+            array( 'db' => 't_stat',     'dt' => 11 ),
+            array( 'db' => 'effect_size',     'dt' => 12 ),
+            array( 'db' => 'p_value',     'dt' => 13 ),
+            array( 'db' => 'trans',     'dt' => 14 ),
+            //array( 'db' => 'timepoint2', 'dt' => 15 ),
+        );
+    } elseif (preg_match("/^(\d+)\:(\d+)$/", $query, $output)) {
+        $wherequery = "snp='rs7104570' AND id=id2";
+        $table = 'records';
+        $table2 = 'records2';
+        $columns = array(
+            //array( 'db' => 'timepoint', 'dt' => 0 ),
+            array(
+                'db'        => 'timepoint',
+                'dt'        => 0,
+                'formatter' => function( $d, $row ) {
+                    return '<a class="daliance" href="">'.$d.'</span>';
+                }
+            ),
+            array( 'db' => 'snp',  'dt' => 1 ),
+            array( 'db' => 'snp_chr',   'dt' => 2 ),
+            array( 'db' => 'snp_pos',     'dt' => 3 ),
+            array( 'db' => 'a1',     'dt' => 4 ),
+            array( 'db' => 'a2',     'dt' => 5 ),
+            array( 'db' => 'maf',     'dt' => 6 ),
+            array( 'db' => 'cpg',     'dt' => 7 ),
+            array( 'db' => 'cpg_chr',     'dt' => 8 ),
+            array( 'db' => 'cpg_pos',     'dt' => 9 ),
+            array( 'db' => 'beta',     'dt' => 10 ),
+            array( 'db' => 't_stat',     'dt' => 11 ),
+            array( 'db' => 'effect_size',     'dt' => 12 ),
+            array( 'db' => 'p_value',     'dt' => 13 ),
+            array( 'db' => 'trans',     'dt' => 14 ),
+            //array( 'db' => 'timepoint2', 'dt' => 15 ),
         );
     } elseif (preg_match("/^(\d+)\:(\d+)\-(\d+)$/", $query, $output)) {
         //$wherequery = "cpg_pos='".$out."'";
@@ -64,6 +123,31 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
 } else {
     $wherequery = '';
     $table = 'records';
+    $columns = array(
+        //array( 'db' => 'timepoint', 'dt' => 0 ),
+        array(
+            'db'        => 'timepoint',
+            'dt'        => 0,
+            'formatter' => function( $d, $row ) {
+                return '<a class="daliance" href="">'.$d.'</span>';
+            }
+        ),
+        array( 'db' => 'snp',  'dt' => 1 ),
+        array( 'db' => 'snp_chr',   'dt' => 2 ),
+        array( 'db' => 'snp_pos',     'dt' => 3 ),
+        array( 'db' => 'a1',     'dt' => 4 ),
+        array( 'db' => 'a2',     'dt' => 5 ),
+        array( 'db' => 'maf',     'dt' => 6 ),
+        array( 'db' => 'cpg',     'dt' => 7 ),
+        array( 'db' => 'cpg_chr',     'dt' => 8 ),
+        array( 'db' => 'cpg_pos',     'dt' => 9 ),
+        array( 'db' => 'beta',     'dt' => 10 ),
+        array( 'db' => 't_stat',     'dt' => 11 ),
+        array( 'db' => 'effect_size',     'dt' => 12 ),
+        array( 'db' => 'p_value',     'dt' => 13 ),
+        array( 'db' => 'trans',     'dt' => 14 ),
+        //array( 'db' => 'timepoint2', 'dt' => 15 ),
+    );
 }
 
 
@@ -113,6 +197,6 @@ require( 'ssp.class.php' );
  
 echo json_encode(
     //SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )
-    //SSP::complex ( $_GET, $sql_details, $table, $primaryKey, $columns, $whereResult=null, $whereAll=$wherequery )
-    SSP::custom ( $_POST, $sql_details, $table, $table2, $primaryKey, $columns, $whereResult=null, $whereAll=$wherequery )
+    SSP::complex ( $_GET, $sql_details, $table, $primaryKey, $columns, $whereResult=null, $whereAll=$wherequery )
+    //SSP::custom ( $_POST, $sql_details, $table, $table2, $primaryKey, $columns, $whereResult=null, $whereAll=$wherequery )
 );

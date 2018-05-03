@@ -1237,6 +1237,47 @@ input[type="text"].form-control {
 	background: rgb(220,220,220,0.8);
     width: 50%;
     margin: 1em auto;
+    padding: 1em;
     border-radius: 2px;
     font-size: 0.9em;
+    display: inline-block;
+}
+
+.examples ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.examples ul li {
+	text-align: left;
+	margin-left: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+
+	body {
+		font-size: 0.8em;
+	}
+
+	table.dataTable.display tbody td, table.dataTable.display th {
+	    
+	    width: auto;
+	    padding: 5px 15px 5px 10px;
+	}
+
+}
+
+@media only screen and (max-width: 768px) {
+
+	body {
+		font-size: 0.6em;
+	}
+
+	table.dataTable.display tbody td, table.dataTable.display th {
+
+	    width: auto!important;
+	    padding: 1px 18px 1px 5px;
+	}
+
 }

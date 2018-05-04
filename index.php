@@ -22,7 +22,7 @@ include 'header.php';
 		                	<li>SNP name: e.g. <a href="/mqtldb/search-results.php?query=rs7105015" data-original-title="" title="">rs7105015</a></li>
 		                	<li>CpG name: e.g. <a href="/mqtldb/search-results.php?query=cg24851651" data-original-title="" title="">cg24851651</a></li>
 		                	<li>Chromosome position: e.g. <a href="/mqtldb/search-results.php?query=1:160000" data-original-title="" title="">1:160000</a></li>
-		                	<li>Chromosome range: e.g. <a href="/mqtldb/search-results.php?query=6:160000-250000" data-original-title="" title="">6:16000000-25000000</a></li>
+		                	<li>Chromosome range: e.g. <a href="/mqtldb/search-results.php?query=cpg:6:160000-250000" data-original-title="" title="">cpg:6:16000000-25000000</a></li>
 		                	<li>Gene name: e.g. <a href="/mqtldb/search-results.php?query=vincent" data-original-title="" title="">vincent</a></li>
 		                </ul>
 		            </div>

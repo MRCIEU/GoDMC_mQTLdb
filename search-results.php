@@ -6,8 +6,10 @@
 <?php 
 	if (isset($_GET['query']) && $_GET['query'] != '') {
 		$query =  $_GET['query'];
+		$showquery = $query;
 	} else {
-		$query = '<em>no search term</em>';
+		$query = '';
+		$showquery = 'no search term';
 	}
 ?>
 
@@ -18,7 +20,8 @@
 					<h2>GoDMC Search</h2>
 					<form action="/mqtldb/search-results.php" name="searchform" id="searchform" method="get">
 						<div class="input-group">
-			                <input type="text" class="form-control" placeholder="Search the GoDMC database" id="search" name="query" value="<?php echo $query; ?>">
+							<textarea class="form-control" placeholder="Search the GoDMC database" id="search" name="query"><?php echo $query; ?></textarea>
+			                
 			                <span class="input-group-btn">
 			                    <button class="btn btn-default" type="submit" id="search-button">
 			                        <span class="glyphicon glyphicon-search"></span>
@@ -27,7 +30,7 @@
 			            </div>
 		        	</form>
 					<p><strong>Results for </strong> 
-						<?php echo $query; ?>		
+						<em><?php echo $showquery; ?></em>
 					</p>
 				</header>
 				<div class="container results">

@@ -1117,7 +1117,7 @@ table #results {  }
     float: left;
     margin-bottom: 0;
 }
-input[type="text"].form-control {
+input[type="text"].form-control, textarea.form-control {
     display: block;
     width: 100%;
     height: 34px;
@@ -1134,7 +1134,12 @@ input[type="text"].form-control {
     -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
 
+textarea.form-control {
+	resize:vertical;
+	min-height: 34px;
+	height: 68px;
 }
 
 .input-group-btn {
@@ -1145,7 +1150,7 @@ input[type="text"].form-control {
 .input-group-addon, .input-group-btn {
     width: 1%;
     white-space: nowrap;
-    vertical-align: middle;
+    vertical-align: top;
 }
 .input-group-addon, .input-group-btn, .input-group .form-control {
     display: table-cell;

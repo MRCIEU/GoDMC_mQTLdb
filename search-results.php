@@ -3,45 +3,63 @@
 	include 'datatables_inc.php';
 ?>
 
+<?php 
+	if (isset($_GET['query']) && $_GET['query'] != '') {
+		$query =  $_GET['query'];
+	} else {
+		$query = '<em>no search term</em>';
+	}
+?>
 
 
 		<!-- Main -->
 			<section id="main" class="wrapper style1">
 				<header class="major">
 					<h2>GoDMC Search</h2>
+					<form action="/mqtldb/search-results.php" name="searchform" id="searchform" method="get">
+						<div class="input-group">
+			                <input type="text" class="form-control" placeholder="Search the GoDMC database" id="search" name="query" value="<?php echo $query; ?>">
+			                <span class="input-group-btn">
+			                    <button class="btn btn-default" type="submit" id="search-button">
+			                        <span class="glyphicon glyphicon-search"></span>
+			                    </button>
+			                </span>
+			            </div>
+		        	</form>
 					<p><strong>Results for </strong> 
-						<?php 
-						if (isset($_GET['query']) && $_GET['query'] != '') {
-							echo $_GET['query'];
-						} else {
-							
-							echo '<em>no search term</em>';
-						}
-						?>
+						<?php echo $query; ?>		
 					</p>
 				</header>
-				<div class="container">
+				<div class="container results">
 					<section>
 						
 						<table class="display nowrap" cellspacing="0" id="results">
 				            <thead>
 				                <tr>
-				                    <th>Timepoint</th>
-				                    <th>SNP</th>
-				                    <th>SNP Chr</th>
-				                    <th>SNP Pos</th>
-				                    <th>A1</th>
-				                    <th>A2</th>
-				                    <th>MAF</th>
-				                    <th>CpG</th>
-				                    <th>CpG Chr</th>
-				                    <th>CpG Pos</th>
-				                    <th>beta</th>
-				                    <th>t-stat</th>
-				                    <th>Effect Size</th>
-				                    <th>p-value</th>
-				                    <th>Trans</th>
-				                    <!-- <th>Timepoint2</th> -->
+				                    <th>se_mre</th>
+									<th>chunk</th>
+									<th>hetchisq</th>
+									<th>num_studies</th>
+									<th>pval_mre</th>
+									<th>samplesize</th>
+									<th>beta_a1</th>
+									<th>freq_se</th>
+									<th>hetpval</th>
+									<th>hetisq</th>
+									<th>rsid</th>
+									<th>pval_are</th>
+									<th>direction</th>
+									<th>cistrans</th>
+									<th>a1</th>
+									<th>a2</th>
+									<th>se_are</th>
+									<th>snp</th>
+									<th>pval</th>
+									<th>tausq</th>
+									<th>cpg</th>
+									<th>beta_are_a1</th>
+									<th>freq_a1</th>
+									<th>se</th>
 				                </tr>
 				            </thead>
 
@@ -51,47 +69,7 @@
             
 					</section>
 					<section>
-					<div>
-						<p id="reference"></p>
-						<script language="javascript" src="//www.biodalliance.org/release-0.13/dalliance-compiled.js"></script>
-						<script language="javascript">
-						  new Browser({
-						    chr:          '22',
-						    viewStart:    30700000,
-						    viewEnd:      30900000,
-
-						    coordSystem: {
-						      speciesName: 'Human',
-						      taxon: 9606,
-						      auth: 'GRCh',
-						      version: '37',
-						      ucscName: 'hg19'
-						    },
-
-						    sources:     [{name:                 'Genome',
-						                   twoBitURI:            '//www.biodalliance.org/datasets/hg19.2bit',
-						                   tier_type:            'sequence'},
-						                  {name:                 'Genes',
-						                   desc:                 'Gene structures from GENCODE 19',
-						                   bwgURI:               '//www.biodalliance.org/datasets/gencode.bb',
-						                   stylesheet_uri:       '//www.biodalliance.org/stylesheets/gencode.xml',
-						                   collapseSuperGroups:  true,
-						                   trixURI:              '//www.biodalliance.org/datasets/geneIndex.ix'},
-						                  {name:                 'Repeats',
-						                   desc:                 'Repeat annotation from Ensembl',
-						                   bwgURI:               '//www.biodalliance.org/datasets/repeats.bb',
-						                   stylesheet_uri:       '//www.biodalliance.org/stylesheets/bb-repeats.xml'},
-						                  {name:                 'Conservation',
-						                   desc:                 'Conservation', 
-						                   bwgURI:               '//www.biodalliance.org/datasets/phastCons46way.bw',
-						                   noDownsample:         true}],
-
-						  });
-						</script>
-
-						<div id="svgHolder"></div>
-
-					</div>
+					
 				</section>
 				</div>
 			</section>
@@ -176,35 +154,80 @@
 				    	"processing": true,
 					    //"oSearch": {"sSearch": search },
 				    	"searching" : true,
-				        "serverSide": true,
+				        //"serverSide": true,
 				        "oLanguage": {
-						   "sSearch": "Search within the table:"
+						   "sSearch": "Search within the table:",
+						   "loadingRecords" : "Records loading",
 						},
 
-				        "ajax": {
-				        	"url": "serverside.php",
+
+				   //      "ajax": {
+				   //      	"url": "serverside-api.php",
+				   //      	"type": "GET",
+				   //      	"data": { "query": query } ,
+				   //      	"cache": false,
+				   //      	"headers": {
+							// 	'Cache-Control': 'no-cache, no-store, must-revalidate', 
+							// 	'Pragma': 'no-cache', 
+							// 	'Expires': '0'
+							// }
+				   //      },
+
+				   		"ajax": {
+				        	"url": "serverside-api.php",
 				        	"type": "GET",
+				        	"dataSrc": "data",
 				        	"data": { "query": query } ,
 				        	"cache": false,
-				        	"headers": {
-								'Cache-Control': 'no-cache, no-store, must-revalidate', 
-								'Pragma': 'no-cache', 
-								'Expires': '0'
+				         	"headers": {
+							 	'Cache-Control': 'no-cache, no-store, must-revalidate', 
+							 	'Pragma': 'no-cache', 
+							 	'Expires': '0'
 							}
 				        },
-				        lengthMenu: [
-				            [ 10, 25, 50 ],
-				            [ '10 rows', '25 rows', '50 rows' ]
+				         "columns": [
+				            { "data": "se_mre" },
+							{ "data": "chunk" },
+							{ "data": "hetchisq" },
+							{ "data": "num_studies" },
+							{ "data": "pval_mre" },
+							{ "data": "samplesize" },
+							{ "data": "beta_a1" },
+							{ "data": "freq_se" },
+							{ "data": "hetpval" },
+							{ "data": "hetisq" },
+							{ "data": "rsid" },
+							{ "data": "pval_are" },
+							{ "data": "direction" },
+							{ "data": "cistrans" },
+							{ "data": "a1" },
+							{ "data": "a2" },
+							{ "data": "se_are" },
+							{ "data": "snp" },
+							{ "data": "pval" },
+							{ "data": "tausq" },
+							{ "data": "cpg" },
+							{ "data": "beta_are_a1" },
+							{ "data": "freq_a1" },
+							{ "data": "se" },
 				        ],
+				        lengthMenu: [
+				            [ 10, 25, 50, 100 ],
+				            [ '10 rows', '25 rows', '50 rows', '100 rows' ]
+				        ],
+				        
 				        dom: 'Bfrtip',
 				        buttons: ['pageLength',
-				        		{
-				                    extend: 'csv',
-				                    text: 'Export as CSV',
-				                    filename: 'export'
-				                }]
+			        		{
+			                    extend: 'csv',
+			                    text: 'Export as CSV',
+			                    filename: 'export'
+			                }],
+			            
 				    } );
 				    
+					
+
 				    $(document).on("click", "a.daliance", function(e){
 					    var txt = $(this).text();
 					    console.log(txt);

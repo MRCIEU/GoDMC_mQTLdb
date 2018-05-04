@@ -45,88 +45,98 @@ function CallAPI($method, $url, $data = false)
 
 $assoc_meta = false;
 
-if (isset($_GET['query']) && $_GET['query'] != '') {
+if (isset($_GET['query']) && $_GET['query'] != '') { 
     $query = $_GET['query'];
-
-    // CPG
-    if (preg_match("/^cg\d+$/", $query, $output)) {
-        $prefix = 'cpgs';
-        $value = $output[0];
-        $url = 'http://api.godmc.org.uk/v0.1/query';
-        $data = array( "{$prefix}" => ["{$value}"]);                                                                    
-        $data_string = json_encode($data);    
-        $method = 'POST';
+    //$querylines = explode("\n", str_replace("\r", "", $query));
+    $querylines = preg_split( "/(\r\n|\n|\r|,)/", $query );
+    $method = '';
+    $key = '';
+    $url = '';
+    
+    // Initialise arrays as needed
+    foreach( $querylines as $entry ){
+        error_log($entry);
+        if (preg_match("/^cg\d+$/", $entry, $output)) {
+            $all_data['cpgs'] = array();
+        }
+        if (preg_match("/^rs\d+$/", $entry, $output)) {
+            $all_data['rsids'] = array();
+        }
+        if (preg_match("/^chr(\d.*)\:(\d.*)\:(\w.*)$/", $entry, $output)) {
+            $all_data['snps'] = array();
+        }
+        if (preg_match("/^(cpg|snp)\:((\d+)\:(\d+)\-(\d+))$/", $entry, $output)) {
+            $all_data = array();
+        }
     }
 
-    // RSID
-    if (preg_match("/^rs\d+$/", $query, $output)) {
-        $prefix = 'rsids';
-        $value = $output[0];
-        $url = 'http://api.godmc.org.uk/v0.1/query';
-        $data = array( "{$prefix}" => ["{$value}"]);                                                                    
-        $data_string = json_encode($data);    
-        $method = 'POST';
-    } elseif (preg_match("/^chr(\d.*)\:(\d.*)\:(\w)$/", $query, $output)) {
-        // This doesn't currently work - search on API returns no match    
-        $prefix = 'rsids';
-        $value = $output[0];
-        $url = 'http://api.godmc.org.uk/v0.1/query';
-        $data = array( "{$prefix}" => ["{$value}"]);                                                                    
-        $data_string = json_encode($data);    
-        $method = 'POST';
-    }
+    // Add values to arrays for conversion to JSON to be submitted to API
+    foreach( $querylines as $entry ){    
+        
+        // CPG
+        if (preg_match("/^cg\d+$/", $entry, $output)) {
+            $value = $output[0];
+            array_push($all_data['cpgs'],$value); 
+        }
+        // RSID
+        if (preg_match("/^rs\d+$/", $entry, $output)) {
+             $value = $output[0];
+             array_push($all_data['rsids'],$value); 
+        }
+        // SNP
+        if (preg_match("/^chr(\d.*)\:(\d.*)\:(\w.*)$/", $entry, $output)) {
+            $value = $output[0];
+            array_push($all_data['snps'],$value);                                                                    
+        }
+        // CPG/SNP Range
+        if (preg_match("/^(cpg|snp)\:((\d+)\:(\d+)\-(\d+))$/", $entry, $output)) {
+            $prefix = 'cpgs';
+            $attr = $output[1];
+            $value = $output[2];    
+            $url = 'http://api.godmc.org.uk/v0.1/assoc_meta/range/'.$attr.'/'.$value;
+            $assoc_meta = true;
+        }
 
-    // SNP
-    if (preg_match("/^chr(\d.*)\:(\d.*)\:(\w.*)$/", $query, $output)) {
-        $prefix = 'snps';
-        $value = $output[0];
-        $url = 'http://api.godmc.org.uk/v0.1/query';
-        $data = array( "{$prefix}" => ["{$value}"]);                                                                    
-        $data_string = json_encode($data);    
-        $method = 'POST';
     }
     
-    // CPG Range
-    //http://api.godmc.org.uk/v0.1/assoc_meta/range/cpg/10:10000000-10100000
-    if (preg_match("/^(cpg|snp)\:((\d+)\:(\d+)\-(\d+))$/", $query, $output)) {
-        // $q1string = "/assoc_meta/range/".$output[1]."/".$output[2];
-        // error_log($q1string);
-        $prefix = 'cpgs';
-        $attr = $output[1];
-        $value = $output[2];    
-        $url = 'http://api.godmc.org.uk/v0.1/assoc_meta/range/'.$attr.'/'.$value;
-        $method = 'GET';
-        $assoc_meta = true;
+    
+
+    $data_string = json_encode($all_data);    
+
+
+    if ( $assoc_meta == true ) {
+        $qdata =  json_decode(CallApi('GET', $url),true);    
+        // $json_data = json_decode($q1data, true);    
+        $json_data = $qdata['assoc_meta'];    
+    } else {
+        $qdata =  json_decode(CallApi('POST', 'http://api.godmc.org.uk/v0.1/query', $data_string),true);    
+        $json_data = $qdata;
     }
 
 
-}
+
+    $returned_records = sizeof($json_data);
+
+    $returned_json = json_encode(array( 'draw' => '1', 'recordsTotal' => $returned_records, 'recordsFiltered' => $returned_records, 'data' => $json_data));
 
 
 
 
-//$q1data =  json_decode(CallApi('GET', 'http://api.godmc.org.uk/v0.1/'.$q1string),true);
-
-
-
-
-
-if ( $assoc_meta == true ) {
-    $qdata =  json_decode(CallApi($method, $url),true);    
-    // $json_data = json_decode($q1data, true);    
-    $json_data = $qdata['assoc_meta'];    
 } else {
-    $qdata =  json_decode(CallApi($method, $url, $data_string),true);    
-    $json_data = $qdata;
+    // No search term supplied
+    $returned_json = json_encode(array( 'draw' => '1', 'recordsTotal' => 0, 'recordsFiltered' => 0, 'data' => []));
 }
-
-
-
-$returned_records = sizeof($json_data);
-
-$returned_json = json_encode(array( 'draw' => '1', 'recordsTotal' => $returned_records, 'recordsFiltered' => $returned_records, 'data' => $json_data));
 
 print_r($returned_json);
+
+
+
+
+
+
+
+
+
 
 
 

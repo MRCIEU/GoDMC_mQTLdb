@@ -1139,7 +1139,8 @@ input[type="text"].form-control, textarea.form-control {
 textarea.form-control {
 	resize:vertical;
 	min-height: 34px;
-	height: 68px;
+	height: 34px;
+	overflow: hidden;
 }
 
 .input-group-btn {
@@ -1291,4 +1292,11 @@ textarea.form-control {
 	    padding: 1px 18px 1px 5px;
 	}
 
+}
+
+table.dataTable.nowrap th, table.dataTable.nowrap td {
+    white-space: initial!important;
+    word-break: normal;
+    width: auto!important;
+    max-width: 400px;
 }

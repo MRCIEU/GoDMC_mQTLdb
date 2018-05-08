@@ -11,6 +11,21 @@
 		$query = '';
 		$showquery = 'no search term';
 	}
+
+	if ($query != '') {
+	
+	    $querylines = preg_split( "/(\r\n|\n|\r|,)/", $query );
+		$table = 'other';
+
+		// Check query type to determine table header display option	    
+	    foreach( $querylines as $entry ){
+	        if (preg_match("/^(?![rs|cg|chr\d:|\d:]).*$/", $entry, $output)) {
+	            $table = 'gene';
+	        } 
+	    }
+
+	}
+
 ?>
 
 
@@ -19,7 +34,7 @@
 				<header class="major">
 					<h2>GoDMC Search</h2>
 					<form action="/mqtldb/search-results.php" name="searchform" id="searchform" method="get">
-						<div class="input-group">
+						<div class="input-group" id="search-box">
 							<textarea class="form-control" placeholder="Search the GoDMC database" id="search" name="query"><?php echo $query; ?></textarea>
 			                
 			                <span class="input-group-btn">
@@ -39,6 +54,7 @@
 						<table class="display nowrap" cellspacing="0" id="results">
 				            <thead>
 				                <tr>
+				                <?php if ($table == 'other'): ?>
 				                    <th>se_mre</th>
 									<th>chunk</th>
 									<th>hetchisq</th>
@@ -63,6 +79,17 @@
 									<th>beta_are_a1</th>
 									<th>freq_a1</th>
 									<th>se</th>
+								<?php elseif ( $table == 'gene' ) : ?>
+									<th style="width: 100px!important">gene type</th>
+									<th>name</th>
+									<th>stop original</th>
+									<th>source</th>
+									<th>chr</th>
+									<th>start pos</th>
+									<th>strand original</th>
+									<th>stop pos</th>
+									<th>start original</th>
+								<?php endif; ?>
 				                </tr>
 				            </thead>
 
@@ -147,48 +174,9 @@
 					};
 
 					var query = getUrlParameter('query');
-					
-					// if (typeof query == 'undefined') {
-					// 	query = '';
 
-					// }
-
-				    $('#results').DataTable( {
-				    	"processing": true,
-					    //"oSearch": {"sSearch": search },
-				    	"searching" : true,
-				        //"serverSide": true,
-				        "oLanguage": {
-						   "sSearch": "Search within the table:",
-						   "loadingRecords" : "Records loading",
-						},
-
-
-				   //      "ajax": {
-				   //      	"url": "serverside-api.php",
-				   //      	"type": "GET",
-				   //      	"data": { "query": query } ,
-				   //      	"cache": false,
-				   //      	"headers": {
-							// 	'Cache-Control': 'no-cache, no-store, must-revalidate', 
-							// 	'Pragma': 'no-cache', 
-							// 	'Expires': '0'
-							// }
-				   //      },
-
-				   		"ajax": {
-				        	"url": "serverside-api.php",
-				        	"type": "GET",
-				        	"dataSrc": "data",
-				        	"data": { "query": query } ,
-				        	"cache": false,
-				         	"headers": {
-							 	'Cache-Control': 'no-cache, no-store, must-revalidate', 
-							 	'Pragma': 'no-cache', 
-							 	'Expires': '0'
-							}
-				        },
-				         "columns": [
+					if (! /^(?![rs|cg|chr\d:|\d:]).*$/.test(query) ) {
+						var columns = [
 				            { "data": "se_mre" },
 							{ "data": "chunk" },
 							{ "data": "hetchisq" },
@@ -213,7 +201,48 @@
 							{ "data": "beta_are_a1" },
 							{ "data": "freq_a1" },
 							{ "data": "se" },
-				        ],
+				        ];
+				    } else if ( /^(?![rs|cg|chr\d:|\d:]).*$/.test(query) ) {
+				    	var columns = [
+				    		{ "data" : "gene_type" },
+							{ "data" : "name" },
+							{ "data" : "stop_original" },
+							{ "data" : "source" },
+							{ "data" : "chr" },
+							{ "data" : "start_pos" },
+							{ "data" : "strand_original" },
+							{ "data" : "stop_pos" },
+							{ "data" : "start_original" },
+				    	];
+				    }
+
+
+				    $('#results').DataTable( {
+				    	"processing": true,
+					    //"oSearch": {"sSearch": search },
+				    	"searching" : true,
+				        //"serverSide": true,
+				        "oLanguage": {
+						   "sSearch": "Search within the table:",
+						   "loadingRecords" : "Records loading",
+						},
+
+				   		"ajax": {
+				        	"url": "serverside-api.php",
+				        	"type": "GET",
+				        	"dataSrc": "data",
+				        	"data": { "query": query } ,
+				        	"cache": false,
+				         	"headers": {
+							 	'Cache-Control': 'no-cache, no-store, must-revalidate', 
+							 	'Pragma': 'no-cache', 
+							 	'Expires': '0'
+							}
+				        },
+				         "columns": columns,
+				         "columnDefs": [
+						    { "width": "10%", "targets": 0 }
+						  ],
 				        lengthMenu: [
 				            [ 10, 25, 50, 100 ],
 				            [ '10 rows', '25 rows', '50 rows', '100 rows' ]
@@ -239,7 +268,12 @@
 					    e.preventDefault();
 					});
 
-				   
+					// var table = $('#example').DataTable();
+ 
+					// $('#container').css( 'display', 'block' );
+					// table.columns.adjust().draw();
+
+				   $('#example td').css('white-space','initial');
 				} );
 		    </script>
 

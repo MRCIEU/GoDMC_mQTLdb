@@ -44,6 +44,7 @@ function CallAPI($method, $url, $data = false)
 
 
 $assoc_meta = false;
+$info = false;
 
 if (isset($_GET['query']) && $_GET['query'] != '') { 
     $query = $_GET['query'];
@@ -66,6 +67,9 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
             $all_data['snps'] = array();
         }
         if (preg_match("/^(cpg|snp)\:((\d+)\:(\d+)\-(\d+))$/", $entry, $output)) {
+            $all_data = array();
+        }
+        if (preg_match("/^(?![rs|cg|chr\d:|\d:]).*$/", $entry, $output)) {
             $all_data = array();
         }
     }
@@ -96,6 +100,12 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
             $url = 'http://api.godmc.org.uk/v0.1/assoc_meta/range/'.$attr.'/'.$value;
             $assoc_meta = true;
         }
+        // Gene name
+        if (preg_match("/^(?![rs|cg|chr\d:|\d:]).*$/", $entry, $output)) {
+            $value = $output[0];    
+            $url = 'http://api.godmc.org.uk/v0.1/info/gene/'.$value;
+            $info = true;
+        }
 
     }
     
@@ -106,8 +116,10 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
 
     if ( $assoc_meta == true ) {
         $qdata =  json_decode(CallApi('GET', $url),true);    
-        // $json_data = json_decode($q1data, true);    
         $json_data = $qdata['assoc_meta'];    
+    } elseif ( $info == true) {
+        $qdata =  json_decode(CallApi('GET', $url),true);    
+        $json_data = $qdata;    
     } else {
         $qdata =  json_decode(CallApi('POST', 'http://api.godmc.org.uk/v0.1/query', $data_string),true);    
         $json_data = $qdata;

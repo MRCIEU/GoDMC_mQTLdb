@@ -14,7 +14,7 @@
 				global: {
 					range: '*',
 					href: 'css/style.css',
-					containers: 1400,
+					//containers: 1400,
 					grid: {
 						gutters: {
 							vertical: '4em',
@@ -27,14 +27,14 @@
 				xlarge: {
 					range: '-1680',
 					href: 'css/style-xlarge.css',
-					containers: 1200
+					//containers: 1200
 				},
 
 			// Large.
 				large: {
 					range: '-1280',
 					href: 'css/style-large.css',
-					containers: 960,
+					//containers: 960,
 					grid: {
 						gutters: {
 							vertical: '2.5em'
@@ -49,7 +49,7 @@
 				medium: {
 					range: '-980',
 					href: 'css/style-medium.css',
-					containers: '90%',
+					//containers: '90%',
 					grid: {
 						collapse: 1
 					}
@@ -59,7 +59,7 @@
 				small: {
 					range: '-736',
 					href: 'css/style-small.css',
-					containers: '90%',
+					//containers: '90%',
 					grid: {
 						gutters: {
 							vertical: '1.25em'
@@ -116,6 +116,10 @@
 	$(function() {
 		
 		// jQuery ready stuff.
+		$('#search-box').on( 'change keyup keydown paste cut', 'textarea', function (){
+			console.log(this.scrollHeight-14);
+		    $(this).height(0).height(this.scrollHeight-14);
+		}).find( 'textarea' ).change();
 		
 	});
 

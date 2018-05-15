@@ -249,7 +249,7 @@
 
 	.select-wrapper {
 		text-decoration: none;
-		display: block;
+		display: inline-block;
 		position: relative;
 	}
 
@@ -266,8 +266,8 @@
 		.select-wrapper:before {
 			color: rgba(144, 144, 144, 0.25);
 			display: block;
-			height: 2.75em;
-			line-height: 2.75em;
+			height: 2em;
+			line-height: 2em;
 			pointer-events: none;
 			position: absolute;
 			right: 0;
@@ -284,7 +284,7 @@
 	input[type="password"],
 	input[type="email"],
 	select {
-		height: 2.75em;
+		height: 2em;
 	}
 
 	textarea {
@@ -1213,7 +1213,7 @@ textarea.form-control {
     -ms-user-select: none;
     user-select: none;
     background-image: none;
-    border: 1px solid transparent;
+    border: 1px solid #ddd;
     border-radius: 4px;
 }
 
@@ -1294,9 +1294,45 @@ textarea.form-control {
 
 }
 
+
+
 table.dataTable.nowrap th, table.dataTable.nowrap td {
     white-space: initial!important;
     word-break: normal;
     width: auto!important;
     max-width: 400px;
+}
+
+div#filters {
+	background: #eee;
+    margin: 10px auto;
+    padding-top: 10px;
+    width: 50%;
+}
+
+#filters input#pval, #filters select#cistrans {
+	display: inline-block;
+	width: 150px;
+}
+
+#filters label {
+  display: inline-block;
+  text-align: left;
+  margin-right: 1rem;
+  width: 150px;
+}​
+
+
+
+
+table.dataTable thead th, table.dataTable tfoot th {
+    font-weight: normal;
+}
+
+h4#toggleheader {
+	padding: 0 0 8px;
+}
+
+div#togglefilters {
+	display: none;
 }

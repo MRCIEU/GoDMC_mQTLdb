@@ -1336,3 +1336,7 @@ h4#toggleheader {
 div#togglefilters {
 	display: none;
 }
+
+input:disabled+label{
+  color: #ddd;
+}

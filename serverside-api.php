@@ -88,9 +88,10 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
         if (preg_match("/^(cpg|snp)\:((\d+)\:(\d+)\-(\d+))$/", $entry, $output)) {
             $all_data = array();
         }
-        if (preg_match("/^(?![rs|cg|chr\d:|\d:]).*$/", $entry, $output)) {
-            $all_data = array();
-        }
+        // Incorrect gene name search
+        // if (preg_match("/^(?![rs|cg|chr\d:|\d:]).*$/", $entry, $output)) {
+        //     $all_data = array();
+        // }
     }
     
 
@@ -121,12 +122,12 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
             $url = 'http://api.godmc.org.uk/v0.1/assoc_meta/range/'.$attr.'/'.$value;
             $assoc_meta = true;
         }
-        // Gene name
-        if (preg_match("/^(?![rs|cg|chr\d:|\d:]).*$/", $entry, $output)) {
-            $value = $output[0];    
-            $url = 'http://api.godmc.org.uk/v0.1/info/gene/'.$value;
-            $info = true;
-        }
+        // // Gene name
+        // if (preg_match("/^(?![rs|cg|chr\d:|\d:]).*$/", $entry, $output)) {
+        //     $value = $output[0];    
+        //     $url = 'http://api.godmc.org.uk/v0.1/info/gene/'.$value;
+        //     $info = true;
+        // }
 
     }
     

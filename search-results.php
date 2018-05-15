@@ -211,73 +211,97 @@
 					    }
 					};
 
-					function getAllUrlParams(url) {
+					// function getAllUrlParams(url) {
 
-					  // get query string from url (optional) or window
-					  var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+					//   // get query string from url (optional) or window
+					//   var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
 
-					  // we'll store the parameters here
-					  var obj = {};
+					//   // we'll store the parameters here
+					//   var obj = {};
 
-					  // if query string exists
-					  if (queryString) {
+					//   // if query string exists
+					//   if (queryString) {
 
-					    // stuff after # is not part of query string, so get rid of it
-					    queryString = queryString.split('#')[0];
+					//     // stuff after # is not part of query string, so get rid of it
+					//     queryString = queryString.split('#')[0];
 
-					    // split our query string into its component parts
-					    var arr = queryString.split('&');
+					//     // split our query string into its component parts
+					//     var arr = queryString.split('&');
 
-					    for (var i=0; i<arr.length; i++) {
-					      // separate the keys and the values
-					      var a = arr[i].split('=');
+					//     for (var i=0; i<arr.length; i++) {
+					//       // separate the keys and the values
+					//       var a = arr[i].split('=');
 
-					      // in case params look like: list[]=thing1&list[]=thing2
-					      var paramNum = undefined;
-					      var paramName = a[0].replace(/\[\d*\]/, function(v) {
-					        paramNum = v.slice(1,-1);
-					        return '';
-					      });
+					//       // in case params look like: list[]=thing1&list[]=thing2
+					//       var paramNum = undefined;
+					//       var paramName = a[0].replace(/\[\d*\]/, function(v) {
+					//         paramNum = v.slice(1,-1);
+					//         return '';
+					//       });
 
-					      // set parameter value (use 'true' if empty)
-					      var paramValue = typeof(a[1])==='undefined' ? true : a[1];
+					//       // set parameter value (use 'true' if empty)
+					//       var paramValue = typeof(a[1])==='undefined' ? true : a[1];
 
-					      // (optional) keep case consistent
-					      paramName = paramName.toLowerCase();
-					      paramValue = paramValue.toLowerCase();
+					//       // (optional) keep case consistent
+					//       paramName = paramName.toLowerCase();
+					//       paramValue = paramValue.toLowerCase();
 
-					      // if parameter name already exists
-					      if (obj[paramName]) {
-					        // convert value to array (if still string)
-					        if (typeof obj[paramName] === 'string') {
-					          obj[paramName] = [obj[paramName]];
+					//       // if parameter name already exists
+					//       if (obj[paramName]) {
+					//         // convert value to array (if still string)
+					//         if (typeof obj[paramName] === 'string') {
+					//           obj[paramName] = [obj[paramName]];
+					//         }
+					//         // if no array index number specified...
+					//         if (typeof paramNum === 'undefined') {
+					//           // put the value on the end of the array
+					//           obj[paramName].push(paramValue);
+					//         }
+					//         // if array index number specified...
+					//         else {
+					//           // put the value at that index number
+					//           obj[paramName][paramNum] = paramValue;
+					//         }
+					//       }
+					//       // if param name doesn't exist yet, set it
+					//       else {
+					//         obj[paramName] = paramValue;
+					//       }
+					//     }
+					//   }
+
+					//   return obj;
+					// }
+
+					function getURLParam(key,target){
+					    var values = [];
+					    if (!target) target = decodeURIComponent(location.search);
+
+					    key = key.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+
+					    var pattern = key + '=([^&#]+)';
+					    var o_reg = new RegExp(pattern,'ig');
+					    while (true){
+					        var matches = o_reg.exec(target);
+					        if (matches && matches[1]){
+					            values.push(matches[1]);
+					        } else {
+					            break;
 					        }
-					        // if no array index number specified...
-					        if (typeof paramNum === 'undefined') {
-					          // put the value on the end of the array
-					          obj[paramName].push(paramValue);
-					        }
-					        // if array index number specified...
-					        else {
-					          // put the value at that index number
-					          obj[paramName][paramNum] = paramValue;
-					        }
-					      }
-					      // if param name doesn't exist yet, set it
-					      else {
-					        obj[paramName] = paramValue;
-					      }
 					    }
-					  }
 
-					  return obj;
+					    if (!values.length){
+					        return null;   
+					    } else {
+					        return values.length == 1 ? values[0] : values;
+					    }
 					}
 
 
 					var query = getUrlParameter('query');
 					var pval = getUrlParameter('pval');
 					var cistrans = getUrlParameter('cistrans');
-					var columnschoice = getAllUrlParams().columns;
+					var columnschoice = getURLParam('columns[]')
 
 					//var colarray = ["se_mre", "chunk", "hetchisq", "num_studies", "pval_mre", "samplesize", "beta_a1", "freq_se", "hetpval", "hetisq", "rsid", "pval_are", "direction", "cistrans", "allele1", "allele2", "a1", "a2", "se_are", "snp", "name", "pval", "tausq", "cpg", "beta_are_a1", "freq_a1", "se"];
 					
@@ -293,14 +317,10 @@
 					var colindex;
 					var dyn_cols = [];
 					for (index = 0; index < allcols.length; ++index) {
-    					//console.log(colarray[index]);
     					item = {};
     					item ["data"] = allcols[index];
 						dyn_cols.push(item);
-
-
 					}	
-					console.log('cols:',dyn_cols);
 
 					if (! /^(?![rs|cg|chr\d:|\d:]).*$/.test(query) ) {
 						var columns = dyn_cols;

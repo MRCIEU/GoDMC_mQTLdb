@@ -48,6 +48,26 @@ $info = false;
 
 if (isset($_GET['query']) && $_GET['query'] != '') { 
     $query = $_GET['query'];
+
+    if (isset($_GET['pval']) && $_GET['pval'] != '') { 
+        $pval = $_GET['pval'];
+        $all_data['pval'] = array();
+        array_push($all_data['pval'], $pval);
+    }
+    
+    if (isset($_GET['cistrans']) && $_GET['cistrans'] != '') { 
+        $cistrans = $_GET['cistrans'];
+        $all_data['cistrans'] = array();
+        array_push($all_data['cistrans'], $cistrans);
+    }
+    if (isset($_GET['columnschoice']) && $_GET['columnschoice'] != '') { 
+        $columns = $_GET['columnschoice'];
+        $all_data['columns'] = array();
+        $values = array_values($columns);
+        $output = join(',', $values);
+        $all_data['columns'] = $output;
+    }
+
     //$querylines = explode("\n", str_replace("\r", "", $query));
     $querylines = preg_split( "/(\r\n|\n|\r|,)/", $query );
     $method = '';
@@ -56,11 +76,10 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
     
     // Initialise arrays as needed
     foreach( $querylines as $entry ){
-        error_log($entry);
         if (preg_match("/^cg\d+$/", $entry, $output)) {
             $all_data['cpgs'] = array();
         }
-        if (preg_match("/^rs\d+$/", $entry, $output)) {
+        if (preg_match("/^rs\d+$/", $entry, $output) || preg_match("/^chr\d+:\d+:\w$/", $entry, $output)) {
             $all_data['rsids'] = array();
         }
         if (preg_match("/^chr(\d.*)\:(\d.*)\:(\w.*)$/", $entry, $output)) {
@@ -73,6 +92,7 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
             $all_data = array();
         }
     }
+    
 
     // Add values to arrays for conversion to JSON to be submitted to API
     foreach( $querylines as $entry ){    
@@ -81,9 +101,10 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
         if (preg_match("/^cg\d+$/", $entry, $output)) {
             $value = $output[0];
             array_push($all_data['cpgs'],$value); 
+          
         }
         // RSID
-        if (preg_match("/^rs\d+$/", $entry, $output)) {
+        if (preg_match("/^rs\d+$/", $entry, $output) || preg_match("/^chr\d+:\d+:\w$/", $entry, $output)) {
              $value = $output[0];
              array_push($all_data['rsids'],$value); 
         }
@@ -109,9 +130,11 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
 
     }
     
-    
+    //error_log(print_r($all_data,true));
 
     $data_string = json_encode($all_data);    
+
+error_log(print_r($data_string,true));
 
 
     if ( $assoc_meta == true ) {

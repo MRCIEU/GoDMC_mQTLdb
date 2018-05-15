@@ -43,6 +43,54 @@
 			                    </button>
 			                </span>
 			            </div>
+
+			            <div id="filters">
+			            	<h4 id="toggleheader">Filters <i class="fas fa-plus-circle"></i></h4>
+			            	<div id="togglefilters">
+					            <div class="input-block">
+					            	<!-- P-VAL -->
+					            	<label for="pval">P-VAL</label>
+					            	<input type="text" id="pval" name="pval" value="<?php echo isset($_GET['pval']) ? $_GET['pval'] : '';?>"/>
+					            </div>
+					            <div class="input-block">
+					            	<!-- CISTRANS -->
+					            	<label for="cistrans">CISTRANS</label>
+					            	<div class="select-wrapper">
+
+					            		<?php 
+					            			if (isset($_GET['cistrans']) && $_GET['cistrans'] != '') {
+					            				$cistrans = $_GET['cistrans'];
+					            			} else {
+					            				$cistrans = '';
+					            			}
+					            		?>
+
+						                <select name="cistrans" id="cistrans">
+						                	<option value="">Select:</option>
+										  	<option value="cis" <?php echo ($cistrans == 'cis' ? 'selected="selected"' : ''); ?>>cis</option>
+										  	<option value="trans"<?php echo ($cistrans == 'trans' ? 'selected="selected"' : ''); ?>>trans</option>
+										  	<option value="cistrans"<?php echo ($cistrans == 'cistrans' ? 'selected="selected"' : ''); ?>>both</option>
+										</select>
+									</div>
+								</div>
+								<div class="input-block">
+									<!-- Columns -->
+									<h4>Select table columns</h4>
+									<?php  
+											$posscols = array("se_mre", "chunk", "hetchisq", "num_studies", "pval_mre", "samplesize", "beta_a1", "freq_se", "hetpval", "hetisq",  "pval_are", "direction", "cistrans", "allele1", "allele2", "se_are", "snp", "pval", "tausq", "cpg", "beta_are_a1", "freq_a1", "se");
+
+											foreach ($posscols as $col) {
+												echo '<input type="checkbox" name="columns[]" value="'.$col.'" id="'.$col.'chk"><label for="'.$col.'chk">'.$col.'</label>';
+											}
+
+
+										?>
+
+
+								</div>
+							</div>
+						</div>
+
 		        	</form>
 					<p><strong>Results for </strong> 
 						<em><?php echo $showquery; ?></em>
@@ -54,31 +102,21 @@
 						<table class="display nowrap" cellspacing="0" id="results">
 				            <thead>
 				                <tr>
-				                <?php if ($table == 'other'): ?>
-				                    <th>se_mre</th>
-									<th>chunk</th>
-									<th>hetchisq</th>
-									<th>num_studies</th>
-									<th>pval_mre</th>
-									<th>samplesize</th>
-									<th>beta_a1</th>
-									<th>freq_se</th>
-									<th>hetpval</th>
-									<th>hetisq</th>
-									<th>rsid</th>
-									<th>pval_are</th>
-									<th>direction</th>
-									<th>cistrans</th>
-									<th>a1</th>
-									<th>a2</th>
-									<th>se_are</th>
-									<th>snp</th>
-									<th>pval</th>
-									<th>tausq</th>
-									<th>cpg</th>
-									<th>beta_are_a1</th>
-									<th>freq_a1</th>
-									<th>se</th>
+				                <?php if ($table == 'other') :
+				                	$min_cols = array("rsid","a1","a2","name");
+				                	if (isset($_GET['columns'])) {
+				                		$colarray = $_GET['columns'];
+				                		$all_cols = array_merge($min_cols, $colarray);
+				                	} else {
+				                		$colarray = array("cpg", "allele1", "allele2", "se","samplesize", "pval" );	
+				                		$all_cols = array_merge($min_cols, $colarray);
+				                	}
+				                	// 
+				                	// error_log(print_r($all_cols,true));
+				                	
+				                	foreach ($all_cols as $column) {
+				                		echo "<th>{$column}</th>";
+				                	} ?>
 								<?php elseif ( $table == 'gene' ) : ?>
 									<th style="width: 100px!important">gene type</th>
 									<th>name</th>
@@ -173,35 +211,100 @@
 					    }
 					};
 
+					function getAllUrlParams(url) {
+
+					  // get query string from url (optional) or window
+					  var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+
+					  // we'll store the parameters here
+					  var obj = {};
+
+					  // if query string exists
+					  if (queryString) {
+
+					    // stuff after # is not part of query string, so get rid of it
+					    queryString = queryString.split('#')[0];
+
+					    // split our query string into its component parts
+					    var arr = queryString.split('&');
+
+					    for (var i=0; i<arr.length; i++) {
+					      // separate the keys and the values
+					      var a = arr[i].split('=');
+
+					      // in case params look like: list[]=thing1&list[]=thing2
+					      var paramNum = undefined;
+					      var paramName = a[0].replace(/\[\d*\]/, function(v) {
+					        paramNum = v.slice(1,-1);
+					        return '';
+					      });
+
+					      // set parameter value (use 'true' if empty)
+					      var paramValue = typeof(a[1])==='undefined' ? true : a[1];
+
+					      // (optional) keep case consistent
+					      paramName = paramName.toLowerCase();
+					      paramValue = paramValue.toLowerCase();
+
+					      // if parameter name already exists
+					      if (obj[paramName]) {
+					        // convert value to array (if still string)
+					        if (typeof obj[paramName] === 'string') {
+					          obj[paramName] = [obj[paramName]];
+					        }
+					        // if no array index number specified...
+					        if (typeof paramNum === 'undefined') {
+					          // put the value on the end of the array
+					          obj[paramName].push(paramValue);
+					        }
+					        // if array index number specified...
+					        else {
+					          // put the value at that index number
+					          obj[paramName][paramNum] = paramValue;
+					        }
+					      }
+					      // if param name doesn't exist yet, set it
+					      else {
+					        obj[paramName] = paramValue;
+					      }
+					    }
+					  }
+
+					  return obj;
+					}
+
+
 					var query = getUrlParameter('query');
+					var pval = getUrlParameter('pval');
+					var cistrans = getUrlParameter('cistrans');
+					var columnschoice = getAllUrlParams().columns;
+
+					//var colarray = ["se_mre", "chunk", "hetchisq", "num_studies", "pval_mre", "samplesize", "beta_a1", "freq_se", "hetpval", "hetisq", "rsid", "pval_are", "direction", "cistrans", "allele1", "allele2", "a1", "a2", "se_are", "snp", "name", "pval", "tausq", "cpg", "beta_are_a1", "freq_a1", "se"];
+					
+					var min_cols = ["rsid","a1","a2","name"];
+
+					if (columnschoice && columnschoice.length > 1) {
+						var colarray = columnschoice;
+						//var colarray = colarray.filter(function (item, pos) {return colarray.indexOf(item) == pos});
+					} else {
+						var colarray = ["cpg", "allele1", "allele2", "se","samplesize", "pval"];
+					}
+					var allcols = min_cols.concat(colarray);
+					var colindex;
+					var dyn_cols = [];
+					for (index = 0; index < allcols.length; ++index) {
+    					//console.log(colarray[index]);
+    					item = {};
+    					item ["data"] = allcols[index];
+						dyn_cols.push(item);
+
+
+					}	
+					console.log('cols:',dyn_cols);
 
 					if (! /^(?![rs|cg|chr\d:|\d:]).*$/.test(query) ) {
-						var columns = [
-				            { "data": "se_mre" },
-							{ "data": "chunk" },
-							{ "data": "hetchisq" },
-							{ "data": "num_studies" },
-							{ "data": "pval_mre" },
-							{ "data": "samplesize" },
-							{ "data": "beta_a1" },
-							{ "data": "freq_se" },
-							{ "data": "hetpval" },
-							{ "data": "hetisq" },
-							{ "data": "rsid" },
-							{ "data": "pval_are" },
-							{ "data": "direction" },
-							{ "data": "cistrans" },
-							{ "data": "a1" },
-							{ "data": "a2" },
-							{ "data": "se_are" },
-							{ "data": "snp" },
-							{ "data": "pval" },
-							{ "data": "tausq" },
-							{ "data": "cpg" },
-							{ "data": "beta_are_a1" },
-							{ "data": "freq_a1" },
-							{ "data": "se" },
-				        ];
+						var columns = dyn_cols;
+
 				    } else if ( /^(?![rs|cg|chr\d:|\d:]).*$/.test(query) ) {
 				    	var columns = [
 				    		{ "data" : "gene_type" },
@@ -231,7 +334,12 @@
 				        	"url": "serverside-api.php",
 				        	"type": "GET",
 				        	"dataSrc": "data",
-				        	"data": { "query": query } ,
+				        	"data": { 
+				        		"query": query,
+				        		"pval": pval,
+				        		"cistrans": cistrans,
+				        		"columnschoice": colarray
+				        		} ,
 				        	"cache": false,
 				         	"headers": {
 							 	'Cache-Control': 'no-cache, no-store, must-revalidate', 
@@ -239,7 +347,7 @@
 							 	'Expires': '0'
 							}
 				        },
-				         "columns": columns,
+				         "columns": dyn_cols,
 				         "columnDefs": [
 						    { "width": "10%", "targets": 0 }
 						  ],
@@ -273,7 +381,7 @@
 					// $('#container').css( 'display', 'block' );
 					// table.columns.adjust().draw();
 
-				   $('#example td').css('white-space','initial');
+				   
 				} );
 		    </script>
 

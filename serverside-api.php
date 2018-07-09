@@ -82,7 +82,7 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
         if (preg_match("/^rs\d+$/", $entry, $output) || preg_match("/^chr\d+:\d+:\w$/", $entry, $output)) {
             $all_data['rsids'] = array();
         }
-        if (preg_match("/^chr(\d.*)\:(\d.*)\:(\w.*)$/", $entry, $output)) {
+        if (preg_match("/^chr(\d.*)\:(\d.*)\:(\w{2,})$/", $entry, $output)) {
             $all_data['snps'] = array();
         }
         if (preg_match("/^(cpg|snp)\:((\d+)\:(\d+)\-(\d+))$/", $entry, $output)) {
@@ -110,7 +110,7 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
              array_push($all_data['rsids'],$value); 
         }
         // SNP
-        if (preg_match("/^chr(\d.*)\:(\d.*)\:(\w.*)$/", $entry, $output)) {
+        if (preg_match("/^chr(\d.*)\:(\d.*)\:(\w{2,})$/", $entry, $output)) {
             $value = $output[0];
             array_push($all_data['snps'],$value);                                                                    
         }

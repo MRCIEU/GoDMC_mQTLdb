@@ -1305,19 +1305,19 @@ table.dataTable.nowrap th, table.dataTable.nowrap td {
     max-width: 400px;
 }
 
-div#filters {
-	background: #eee;
-    margin: 10px auto;
+div.filters {
+	/*background: #eee;*/
+    margin: 0 auto;
     padding-top: 10px;
     width: 50%;
 }
 
-#filters input#pval, #filters select#cistrans {
+.filters input#pval, .filters select#cistrans {
 	display: inline-block;
 	width: 150px;
 }
 
-#filters label {
+.filters label {
   display: inline-block;
   text-align: left;
   margin-right: 1rem;
@@ -1331,12 +1331,15 @@ table.dataTable thead th, table.dataTable tfoot th {
     font-weight: normal;
 }
 
-h4#toggleheader {
-	padding: 0 0 8px;
+h4#togglefiltersheader, h4#togglecolsheader {
+	padding: 0;
+	margin: 0;
+	font-size: 0.8em;
 }
 
-div#togglefilters {
+div#togglefilters, div#togglecols {
 	display: none;
+	background: #eee;
 }
 
 input:disabled+label{
@@ -1355,4 +1358,18 @@ div.tablehide th {
 ul#cohortlist li {
 	display: inline-block;
 	width: 50%;
+}
+
+#filters .input-block {
+	background: #eee;
+}
+
+div#filter-cols {
+	margin-top: 1rem;
+	padding-left: 10px;
+}
+
+
+#filter-pval, #filter-cols {
+	padding-top: 1rem;
 }

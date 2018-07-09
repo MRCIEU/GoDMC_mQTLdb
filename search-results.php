@@ -46,15 +46,15 @@
 			                </span>
 			            </div>
 
-			            <div id="filters">
-			            	<h4 id="toggleheader">Filters <i class="fas fa-plus-circle"></i></h4>
+			            <div class="filters">
+			            	<h4 id="togglefiltersheader">Filter values <i class="fas fa-plus-circle"></i></h4>
 			            	<div id="togglefilters">
-					            <div class="input-block">
+					            <div id="filter-pval" class="input-block">
 					            	<!-- P-VAL -->
 					            	<label for="pval">P-VAL</label>
 					            	<input type="text" id="pval" name="pval" value="<?php echo isset($_GET['pval']) ? $_GET['pval'] : '';?>"/>
 					            </div>
-					            <div class="input-block">
+					            <div id="filter-cistrans" class="input-block">
 					            	<!-- CISTRANS -->
 					            	<label for="cistrans">CISTRANS</label>
 					            	<div class="select-wrapper">
@@ -75,7 +75,12 @@
 										</select>
 									</div>
 								</div>
-								<div class="input-block">
+							</div>
+						</div>
+						<div class="filters">
+							<h4 id="togglecolsheader">Filter table colums <i class="fas fa-plus-circle"></i></h4>
+			            	<div id="togglecols">
+								<div id="filter-cols" class="input-block">
 									<!-- Columns -->
 									<h4>Select table columns</h4>
 									<?php  

@@ -121,9 +121,14 @@
 		    $(this).height(0).height(this.scrollHeight-14);
 		}).find( 'textarea' ).change();
 
-		$("#toggleheader").click(function(event) {
+		$("#togglefiltersheader").click(function(event) {
 	        $('#togglefilters').toggle();
-	        $('#toggleheader').find('i').toggleClass('fa-plus-circle fa-minus-circle')
+	        $('#togglefiltersheader').find('i').toggleClass('fa-plus-circle fa-minus-circle')
+	    });
+
+	    $("#togglecolsheader").click(function(event) {
+	        $('#togglecols').toggle();
+	        $('#togglecolsheader').find('i').toggleClass('fa-plus-circle fa-minus-circle')
 	    });
 
 	 //    var inp = $("input#pval");

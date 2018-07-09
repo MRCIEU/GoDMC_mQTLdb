@@ -83,6 +83,8 @@
 
 											if (isset($_GET['columns'])) {
 												$cols = $_GET['columns'];
+											} else {
+												$cols = array();
 											}
 
 											foreach ($posscols as $col) {

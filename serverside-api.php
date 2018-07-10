@@ -60,6 +60,13 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
         $all_data['cistrans'] = array();
         array_push($all_data['cistrans'], $cistrans);
     }
+
+    if (isset($_GET['clumped']) && $_GET['clumped'] != '') { 
+        $clumped = $_GET['clumped'];
+        $all_data['clumped'] = array();
+        array_push($all_data['clumped'], $clumped);
+    }
+
     if (isset($_GET['columnschoice']) && $_GET['columnschoice'] != '') { 
         $columns = $_GET['columnschoice'];
         $all_data['columns'] = array();
@@ -67,6 +74,8 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
         $output = join(',', $values);
         $all_data['columns'] = $output;
     }
+
+
 
     //$querylines = explode("\n", str_replace("\r", "", $query));
     $querylines = preg_split( "/(\r\n|\n|\r|,)/", $query );
@@ -131,12 +140,7 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
 
     }
     
-    //error_log(print_r($all_data,true));
-
     $data_string = json_encode($all_data);    
-
-error_log(print_r($data_string,true));
-
 
     if ( $assoc_meta == true ) {
         $qdata =  json_decode(CallApi('GET', $url),true);    
@@ -149,14 +153,8 @@ error_log(print_r($data_string,true));
         $json_data = $qdata;
     }
 
-
-
     $returned_records = sizeof($json_data);
-
     $returned_json = json_encode(array( 'draw' => '1', 'recordsTotal' => $returned_records, 'recordsFiltered' => $returned_records, 'data' => $json_data));
-
-
-
 
 } else {
     // No search term supplied
@@ -164,16 +162,5 @@ error_log(print_r($data_string,true));
 }
 
 print_r($returned_json);
-
-
-
-
-
-
-
-
-
-
-
 
 ?>

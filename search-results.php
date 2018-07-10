@@ -4,6 +4,8 @@
 ?>
 
 <?php 
+	$table = 'default';
+
 	if (isset($_GET['query']) && $_GET['query'] != '') {
 		$query =  $_GET['query'];
 		$showquery = $query;
@@ -19,10 +21,13 @@
 
 		// Check query type to determine table header display option	    
 	    foreach( $querylines as $entry ){
+
 	        if (preg_match("/^(?![rs|cg|chr\d:|\d:]).*$/", $entry, $output)) {
 	            $table = 'gene';
+	            error_log($table);
 	        } elseif (preg_match("/^(cpg|snp)\:((\d+)\:(\d+)\-(\d+))$/", $entry, $output)) {
 	        	$table = 'chrpos';
+	        	error_log($table);
 	        }
 	    }
 
@@ -58,7 +63,6 @@
 					            	<!-- CISTRANS -->
 					            	<label for="cistrans">CISTRANS</label>
 					            	<div class="select-wrapper">
-
 					            		<?php 
 					            			if (isset($_GET['cistrans']) && $_GET['cistrans'] != '') {
 					            				$cistrans = $_GET['cistrans'];
@@ -66,7 +70,6 @@
 					            				$cistrans = '';
 					            			}
 					            		?>
-
 						                <select name="cistrans" id="cistrans">
 						                	<option value="">Select:</option>
 										  	<option value="cis" <?php echo ($cistrans == 'cis' ? 'selected="selected"' : ''); ?>>cis</option>
@@ -75,6 +78,25 @@
 										</select>
 									</div>
 								</div>
+								<div id="filter-clumped" class="input-block">
+					            	<!-- CLUMPED -->
+					            	<label for="clumped">CLUMPED</label>
+					            	<div class="select-wrapper">
+					            		<?php 
+					            			if (isset($_GET['clumped']) && $_GET['clumped'] != '') {
+					            				$clumped = $_GET['clumped'];
+					            			} else {
+					            				$clumped = '';
+					            			}
+					            		?>
+						                <select name="clumped" id="clumped">
+						                	<option value="">Select:</option>
+										  	<option value="1" <?php echo ($clumped == '1' ? 'selected="selected"' : ''); ?>>True</option>
+										  	<option value="0"<?php echo ($clumped == '0' ? 'selected="selected"' : ''); ?>>False</option>
+										</select>
+									</div>
+
+					            </div>
 							</div>
 						</div>
 						<div class="filters">
@@ -84,7 +106,7 @@
 									<!-- Columns -->
 									<h4>Select table columns</h4>
 									<?php  
-											$posscols = array("se_mre", "chunk", "hetchisq", "num_studies", "pval_mre", "samplesize", "beta_a1", "freq_se", "hetpval", "hetisq",  "pval_are", "direction", "cistrans", "allele1", "allele2", "se_are", "snp", "pval", "tausq", "cpg", "beta_are_a1", "freq_a1", "se");
+											$posscols = array("se_mre", "chunk", "hetchisq", "num_studies", "pval_mre", "samplesize", "beta_a1", "freq_se", "hetpval", "hetisq",  "pval_are", "direction", "cistrans","se_are", "snp", "pval", "tausq", "cpg", "beta_are_a1", "freq_a1", "se", "clumped");
 
 											if (isset($_GET['columns'])) {
 												$cols = $_GET['columns'];
@@ -96,7 +118,7 @@
 												$checked = '';
 												if (in_array($col,$cols)) $checked = 'checked="checked"';						
 
-												if ($table == 'chrpos' and in_array($col, ['name','allele1','allele2'])) {
+												if ($table == 'chrpos' and in_array($col, ['name'])) {
 													echo '<input type="checkbox" name="columns[]" value="'.$col.'" id="'.$col.'chk" disabled="disabled" '.$checked.'><label for="'.$col.'chk">'.$col.'</label>';
 												} else {
 													echo '<input type="checkbox" name="columns[]" value="'.$col.'" id="'.$col.'chk" '.$checked.'><label for="'.$col.'chk">'.$col.'</label>';	
@@ -126,22 +148,22 @@
 					                		$colarray = $_GET['columns'];
 					                		$all_cols = array_merge($min_cols, $colarray);
 					                	} else {
-					                		$colarray = array("cpg", "allele1", "allele2", "se","samplesize", "pval" );	
+					                		$colarray = array("cpg", "beta_a1",  "se", "samplesize", "pval", "cistrans", "clumped", "hetisq", "direction" );	
 					                		$all_cols = array_merge($min_cols, $colarray);
 					                	}
 					                	foreach ($all_cols as $column) {
 					                		echo "<th>{$column}</th>";
 					                	} 
 					                elseif ($table == 'chrpos') :
-					                	$min_cols = array("rsid","a1","a2");
+					                	$min_cols = array("rsid","a1","a2","name");
 					                	if (isset($_GET['columns'])) {
 					                		$colarray = $_GET['columns'];
 					                		$all_cols = array_merge($min_cols, $colarray);
 					                	} else {
-					                		$colarray = array("cpg", "se","samplesize", "pval" );	
+					                		$colarray = array("cpg", "beta_a1",  "se", "samplesize", "pval", "cistrans", "clumped", "hetisq", "direction" );
 					                		$all_cols = array_merge($min_cols, $colarray);
 					                	}			 
-					                	$all_cols = array_diff($all_cols, ['name','allele1','allele2']);
+					                	$all_cols = array_diff($all_cols, ['name']);
                	
 					                	foreach ($all_cols as $column) {
 					                		echo "<th>{$column}</th>";
@@ -284,9 +306,10 @@
 					  };
 					}
 
-					var query = getUrlParameter('query');
+					var query = getUrlParameter('query');				
 					var pval = getUrlParameter('pval');
 					var cistrans = getUrlParameter('cistrans');
+					var clumped = getUrlParameter('clumped');
 					var columnschoice = getURLParam('columns[]')
 
 					//var colarray = ["se_mre", "chunk", "hetchisq", "num_studies", "pval_mre", "samplesize", "beta_a1", "freq_se", "hetpval", "hetisq", "rsid", "pval_are", "direction", "cistrans", "allele1", "allele2", "a1", "a2", "se_are", "snp", "name", "pval", "tausq", "cpg", "beta_are_a1", "freq_a1", "se"];
@@ -296,10 +319,11 @@
 						if (columnschoice && columnschoice.length > 1) {
 							var colarray = columnschoice;
 							// Remove cols not returned by the API for this search
-							colarray.remove(['name','allele1','allele2']);
+							colarray.remove(['name']);
 							//var colarray = colarray.filter(function (item, pos) {return colarray.indexOf(item) == pos});
 						} else {
-							var colarray = ["cpg", "se","samplesize", "pval"];
+							//var colarray = ["cpg", "se","samplesize", "pval"];
+							var colarray = ["cpg", "beta_a1", "se", "samplesize", "pval", "cistrans", "clumped", "hetisq", "direction" ];
 						}
 					} else if (! /^(?![rs|cg|chr\d:|\d:]).*$/.test(query) ) {
 						var min_cols = ["rsid","a1","a2","name"];
@@ -307,22 +331,32 @@
 							var colarray = columnschoice;
 							//var colarray = colarray.filter(function (item, pos) {return colarray.indexOf(item) == pos});
 						} else {
-							var colarray = ["cpg", "allele1", "allele2", "se","samplesize", "pval"];
+							var colarray = ["cpg", "beta_a1", "se", "samplesize", "pval", "cistrans", "clumped", "hetisq", "direction" ];
 						}
 					}
 
 
 
 					var allcols = min_cols.concat(colarray);
-					console.log(allcols);
+					
 					var colindex;
 					var dyn_cols = [];
 					for (index = 0; index < allcols.length; ++index) {
     					item = {};
     					item ["data"] = allcols[index];
+    					if (allcols[index] == 'clumped' || allcols[index] == 'cistrans') {
+    						item ["render"] = function (data, type, row) {
+                          		return (data === true) ? 'true' : 'false';}
+                          	}
+                        if (allcols[index] == 'rsid') {
+                        	item ["render"] = function (data, type, row) {
+                        		console.log(row.cpg);
+                          		return '<a href="browser.php?cpg='+row.cpg+'" class="dalliance">' + data + '</a>';
+                          	}
+                        }
 						dyn_cols.push(item);
 					}	
-
+console.log(dyn_cols);
 					if (! /^(?![rs|cg|chr\d:|\d:]).*$/.test(query) ) {
 						var columns = dyn_cols;
 
@@ -359,6 +393,7 @@
 				        		"query": query,
 				        		"pval": pval,
 				        		"cistrans": cistrans,
+				        		"clumped": clumped,
 				        		"columnschoice": colarray
 				        		} ,
 				        	"cache": false,
@@ -389,10 +424,11 @@
 				    
 					
 
-				    $(document).on("click", "a.daliance", function(e){
+				    $(document).on("click", "a.dalliance", function(e){
 					    var txt = $(this).text();
 					    console.log(txt);
-					    $('#reference').html(txt);
+					    //$('#reference').html(txt);
+					    localStorage.setItem("cpgreference",getInput);
 
 					    e.preventDefault();
 					});

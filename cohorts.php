@@ -28,7 +28,7 @@ $data = json_decode($content,true);
 
 					        // Cycle through the array
 					        foreach ($data as $cohort) {
-					        	echo '<li>';
+					        	echo '<li class="cohort-heading">';
 					        	echo '<a href="#'.$cohort['name'].'" onclick="toggle_visibility(\''.strtolower($cohort['name']).'\')"><h3 class="togglecohort">'.$cohort['name'].'</h3></a>';
 					        	echo '<div class="tablehide" id="'.strtolower($cohort['name']).'">';
 					        	echo '<table>';

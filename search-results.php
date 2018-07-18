@@ -354,13 +354,12 @@
          //                  	}
                         if (allcols[index] == 'rsid') {
                         	item ["render"] = function (data, type, row) {
-                        		console.log(row.cpg);
                           		return '<a href="browser.php?cpg='+row.cpg+'" class="dalliance">' + data + '</a>';
                           	}
                         }
 						dyn_cols.push(item);
 					}	
-console.log(dyn_cols);
+
 					if (! /^(?![rs|cg|chr\d:|\d:]).*$/.test(query) ) {
 						var columns = dyn_cols;
 
@@ -426,22 +425,6 @@ console.log(dyn_cols);
 			            
 				    } );
 				    
-					
-
-				    $(document).on("click", "a.dalliance", function(e){
-					    var txt = $(this).text();
-					    console.log(txt);
-					    //$('#reference').html(txt);
-					    localStorage.setItem("cpgreference",getInput);
-
-					    e.preventDefault();
-					});
-
-					// var table = $('#example').DataTable();
- 
-					// $('#container').css( 'display', 'block' );
-					// table.columns.adjust().draw();
-
 				   
 				} );
 		    </script>

@@ -40,4 +40,12 @@
 				</nav>
 			</header>
 
-<?php $hosturi =  '//'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']); ?>
+<?php 
+	$dirname = dirname($_SERVER['PHP_SELF']);
+	if ($dirname != '') {
+		$hosturi =  '//'.$_SERVER['HTTP_HOST'].$dirname;
+	} else {
+		$hosturi =  '//'.$_SERVER['HTTP_HOST'];
+	}
+	
+?>

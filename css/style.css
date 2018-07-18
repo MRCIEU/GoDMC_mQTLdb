@@ -1217,6 +1217,9 @@ textarea.form-control {
     background-image: none;
     border: 1px solid #ddd;
     border-radius: 4px;
+    outline: none;
+    background: #92c2e2;
+    color: #fff;
 }
 
 .glyphicon {
@@ -1315,6 +1318,7 @@ div.filters {
 .filters input#pval, .filters select#cistrans, .filters select#clumped {
 	display: inline-block;
 	width: 150px;
+	background: #fff;
 }
 
 .filters label {

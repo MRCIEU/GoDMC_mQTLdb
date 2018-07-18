@@ -36,8 +36,8 @@ $handle = fopen("http://api.godmc.org.uk/v0.1/dl/bed/cpg/".$query, "r");
 $line = fgets($handle);
 $pieces = explode("\t", $line);
 $chr = str_replace("chr","",$pieces[0]);
-$start = $pieces[1];
-$end = $pieces[2];
+$start = intval($pieces[1])+10000;
+$end = intval($pieces[1])+1000000;
 
 
 ?>
@@ -56,8 +56,7 @@ $end = $pieces[2];
 
 						    chr:          '<?php echo $chr; ?>',
 						    viewStart:    <?php echo $start; ?>,
-						    //viewEnd:      <?php echo $end; ?>,
-						    viewEnd:      99999999,
+						    viewEnd:      <?php echo $end; ?>,
 						    cookieKey:    'human-grc_h38',   
 
 							coordSystem: {

@@ -72,9 +72,9 @@
 					            		?>
 						                <select name="cistrans" id="cistrans">
 						                	<option value="">Select:</option>
-										  	<option value="cis" <?php echo ($cistrans == 'cis' ? 'selected="selected"' : ''); ?>>cis</option>
-										  	<option value="trans"<?php echo ($cistrans == 'trans' ? 'selected="selected"' : ''); ?>>trans</option>
-										  	<option value="cistrans"<?php echo ($cistrans == 'cistrans' ? 'selected="selected"' : ''); ?>>both</option>
+						                	<option value="both"<?php echo ($cistrans == '' ? 'selected="selected"' : ''); ?>>Default</option>
+										  	<option value="cis" <?php echo ($cistrans == 'cis' ? 'selected="selected"' : ''); ?>>Cis</option>
+										  	<option value="trans"<?php echo ($cistrans == 'trans' ? 'selected="selected"' : ''); ?>>Trans</option>
 										</select>
 									</div>
 								</div>
@@ -91,8 +91,9 @@
 					            		?>
 						                <select name="clumped" id="clumped">
 						                	<option value="">Select:</option>
-										  	<option value="1" <?php echo ($clumped == '1' ? 'selected="selected"' : ''); ?>>True</option>
-										  	<option value="0"<?php echo ($clumped == '0' ? 'selected="selected"' : ''); ?>>False</option>
+						                	<option value=""<?php echo ($clumped == '' ? 'selected="selected"' : ''); ?>>Default</option>
+										  	<option value="1" <?php echo ($clumped == '1' ? 'selected="selected"' : ''); ?>>Yes</option>
+										  	<option value="0"<?php echo ($clumped == '0' ? 'selected="selected"' : ''); ?>>No</option>
 										</select>
 									</div>
 
@@ -309,6 +310,9 @@
 					var query = getUrlParameter('query');				
 					var pval = getUrlParameter('pval');
 					var cistrans = getUrlParameter('cistrans');
+					if (cistrans == 'both') {
+						cistrans = '';
+					}
 					var clumped = getUrlParameter('clumped');
 					var columnschoice = getURLParam('columns[]')
 
@@ -344,10 +348,10 @@
 					for (index = 0; index < allcols.length; ++index) {
     					item = {};
     					item ["data"] = allcols[index];
-    					if (allcols[index] == 'clumped' || allcols[index] == 'cistrans') {
-    						item ["render"] = function (data, type, row) {
-                          		return (data === true) ? 'true' : 'false';}
-                          	}
+    					// if (allcols[index] == 'clumped' || allcols[index] == 'cistrans') {
+    					// 	item ["render"] = function (data, type, row) {
+         //                  		return (data === true) ? 'true' : 'false';}
+         //                  	}
                         if (allcols[index] == 'rsid') {
                         	item ["render"] = function (data, type, row) {
                         		console.log(row.cpg);

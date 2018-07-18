@@ -2,8 +2,6 @@
 include 'header.php';
 ini_set("auto_detect_line_endings", true);
 
-$hosturi =  '//'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
-
 
 if (isset($_GET['cpg']) && $_GET['cpg'] != '') {
 	$query =  $_GET['cpg'];

@@ -1,4 +1,12 @@
 <!DOCTYPE HTML>
+<?php 
+$dirname = dirname($_SERVER['PHP_SELF']);
+if ($dirname != '/') {
+	$hosturi =  '//'.$_SERVER['HTTP_HOST'].$dirname;
+} else {
+	$hosturi =  '//'.$_SERVER['HTTP_HOST'];
+}
+?>
 <!--
 	Ion by TEMPLATED
 	templated.co @templatedco
@@ -30,22 +38,11 @@
 				<h1><a href="index.php">GoDMC</a></h1>
 				<nav id="nav">
 					<ul>
-						<li><a href="index.php">Home</a></li>
-						<li><a href="cohorts.php">Cohorts</a></li>
-						<li><a href="advanced-search.php">Advanced Search</a></li>
-						<li><a href="downloads.php">Downloads</a></li>
-						<li><a href="about.php">About</a></li>
-						<!-- <li><a href="#" class="button special">Sign Up</a></li> -->
+						<li><a href="index">Home</a></li>
+						<li><a href="cohorts">Cohorts</a></li>
+						<li><a href="downloads">Downloads</a></li>
+						<li><a href="about">About</a></li>
 					</ul>
 				</nav>
 			</header>
 
-<?php 
-	$dirname = dirname($_SERVER['PHP_SELF']);
-	if ($dirname != '/') {
-		$hosturi =  '//'.$_SERVER['HTTP_HOST'].$dirname;
-	} else {
-		$hosturi =  '//'.$_SERVER['HTTP_HOST'];
-	}
-	
-?>

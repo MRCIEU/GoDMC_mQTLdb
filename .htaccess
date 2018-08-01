@@ -1,3 +1,7 @@
 RewriteEngine on
 
-RewriteRule ^index\.html$ index.php [L,NC]
+RewriteRule ^index$ index.php [L,NC]
+RewriteRule ^about$ about.php [L,NC]
+RewriteRule ^cohorts$ cohorts.php [L,NC]
+RewriteRule ^downloads$ downloads.php [L,NC]
+RewriteRule ^search$ search.php [L,NC]

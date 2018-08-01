@@ -11,33 +11,18 @@ if (isset($_GET['cpg']) && $_GET['cpg'] != '') {
 	$cpg = 'No CPG provided';
 }
 
-if ($query != '') {
-	$filenamebb = './data/'.$query.'.bb';
+
+// Get info on cgp
+
+$str = file_get_contents('http://api.godmc.org.uk/v0.1/info/cpg/'.$query);
+$json = json_decode($str, true); // decode the JSON into an associative array
+echo intval($json[0]['pos']);
+$chr = $json[0]['chr'];
+$start = intval($json[0]['pos']) - 500000;
+$end = intval($json[0]['pos']) + 500000;
+if (intval($start) < 1) {
+	$start = 1;
 }
-
-
-// Get BIGBED file if not already downloaded and write to filesystem
-if (file_exists($filenamebb)) {
-    //echo "The file $filenamebb exists";
-} else {
-    //echo "The file $filenamebb does not exist, downloading.";
-    $url = 'http://api.godmc.org.uk/v0.1/dl/bigbed/cpg/'.$query;
-	$file = basename($url);
-	$fp = fopen($filenamebb, 'w');
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_FILE, $fp);
-	$data = curl_exec($ch);
-	curl_close($ch);
-	fclose($fp);
-}
-
-// Read first line of BED file to get CHR and start/end values
-$handle = fopen("http://api.godmc.org.uk/v0.1/dl/bed/cpg/".$query, "r");
-$line = fgets($handle);
-$pieces = explode("\t", $line);
-$chr = str_replace("chr","",$pieces[0]);
-$start = intval($pieces[1])+10000;
-$end = intval($pieces[1])+1000000;
 
 
 ?>
@@ -52,19 +37,24 @@ $end = intval($pieces[1])+1000000;
 					<section>					
 						<script language="javascript" src="//www.biodalliance.org/release-0.13/dalliance-compiled.js"></script>
 						<script language="javascript">
-						  new Browser({		   
+						  var browser = new Browser({		   
 
 						    chr:          '<?php echo $chr; ?>',
 						    viewStart:    <?php echo $start; ?>,
 						    viewEnd:      <?php echo $end; ?>,
-						    cookieKey:    'human-grc_h38',   
+						    cookieKey:    'human-grc_h37',
+							
+						//	chr:          '3',
+						//    viewStart:    16853842,
+						//    viewEnd:      16876919,
+						//    cookieKey:    'human-grc_h37',   
 
 							coordSystem: {
 						    	speciesName: 'Human',
 						    	taxon: 9606,
 						    	auth: 'GRCh',
-						    	version: '38',
-						    	ucscName: 'hg38',
+						    	version: '37',
+						    	ucscName: 'hg37',
 						    },
 
 						    sources: [ 
@@ -90,15 +80,28 @@ $end = intval($pieces[1])+1000000;
 									bwgURI:               '//www.biodalliance.org/datasets/phastCons46way.bw',
 									noDownsample:         true},
 
-						    	{ 	name: '<?php echo $query; ?>',
-                   					bwgURI: '//<?php echo $hosturi; ?>/data/<?php echo $query; ?>.bb',
-									stylesheet_uri:  '//<?php echo $hosturi; ?>/scatter.xml',
-									collapseSuperGroups:  true,
-                   				},	
+//						    	{ 	name: '<?php echo $query; ?>',
+//                   					bwgURI: '<?php echo $hosturi; ?>/data/<?php echo $query; ?>.bb',
+//									stylesheet_uri:  '<?php echo $hosturi; ?>/scatter.xml',
+//									collapseSuperGroups:  true,
+//                   				},
+								
+								{name:                 '<?php echo $query; ?>',
+								desc:                 '<?php echo $query; ?>', 
+								//uri:               '<?php echo $hosturi; ?>/data/<?php echo $query; ?>.bed',
+								uri:               'http://api.godmc.org.uk/v0.1/dl/bed/cpg/<?php echo $query; ?>',
+								tier_type: 			  'memstore',
+								stylesheet_uri:  '<?php echo $hosturi; ?>/scatter.xml',
+								payload: 			  'bed'},
                    			],
+							
+							
 						    
 
 						  });
+						  
+						  
+						  
 						</script>
 
 						<div id="svgHolder"></div>

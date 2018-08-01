@@ -1415,3 +1415,8 @@ table.dataTable.display tbody tr:hover>.sorting_1, table.dataTable.order-column.
 	padding: 0;
 }
 
+.dalliance .main-holder {
+	border: 1px solid #bbb;
+	border-radius: 3px;
+	padding: 5px 0 5px 5px;
+}

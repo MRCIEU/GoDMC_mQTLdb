@@ -16,7 +16,6 @@ if (isset($_GET['cpg']) && $_GET['cpg'] != '') {
 
 $str = file_get_contents('http://api.godmc.org.uk/v0.1/info/cpg/'.$query);
 $json = json_decode($str, true); // decode the JSON into an associative array
-echo intval($json[0]['pos']);
 $chr = $json[0]['chr'];
 $start = intval($json[0]['pos']) - 500000;
 $end = intval($json[0]['pos']) + 500000;

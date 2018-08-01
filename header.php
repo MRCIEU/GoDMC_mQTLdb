@@ -39,6 +39,7 @@ if ($dirname != '/') {
 				<nav id="nav">
 					<ul>
 						<li><a href="index">Home</a></li>
+						<li><a href="search">Search</a></li>
 						<li><a href="cohorts">Cohorts</a></li>
 						<li><a href="downloads">Downloads</a></li>
 						<li><a href="about">About</a></li>

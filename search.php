@@ -144,6 +144,7 @@
 				                <tr>
 				                <?php 
 				                	if ($table == 'default') :
+										echo "<th>&nbsp;</th>";
 					                	$min_cols = array("rsid","a1","a2","name");
 					                	if (isset($_GET['columns'])) {
 					                		$colarray = $_GET['columns'];
@@ -199,50 +200,10 @@
 					
 
 		<!-- Footer -->
-			<footer id="footer">
-				<div class="container">
-					<div class="row double">
-						<div class="6u">
-							<div class="row collapse-at-2">
-								<div class="6u">
-									<h3>Accumsan</h3>
-									<ul class="alt">
-										<li><a href="#">Nascetur nunc varius</a></li>
-										<li><a href="#">Vis faucibus sed tempor</a></li>
-										<li><a href="#">Massa amet lobortis vel</a></li>
-										<li><a href="#">Nascetur nunc varius</a></li>
-									</ul>
-								</div>
-								<div class="6u">
-									<h3>Faucibus</h3>
-									<ul class="alt">
-										<li><a href="#">Nascetur nunc varius</a></li>
-										<li><a href="#">Vis faucibus sed tempor</a></li>
-										<li><a href="#">Massa amet lobortis vel</a></li>
-										<li><a href="#">Nascetur nunc varius</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="6u">
-							<h2>Aliquam Interdum</h2>
-							<p>Blandit nunc tempor lobortis nunc non. Mi accumsan. Justo aliquet massa adipiscing cubilia eu accumsan id. Arcu accumsan faucibus vis ultricies adipiscing ornare ut. Mi accumsan justo aliquet.</p>
-							<ul class="icons">
-								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
-							</ul>
-						</div>
-					</div>
-					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li>
-						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
-						<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
-					</ul>
-				</div>
-			</footer>
+		<?php 
+		include 'footer.php';
+		?>	
+			
 			<script type="text/javascript" class="init">
 		        $(document).ready(function() {
 
@@ -345,6 +306,13 @@
 					
 					var colindex;
 					var dyn_cols = [];
+					// Add browse link to first column
+					item = {};
+					item["data"] = null;
+					item["render"] = function (data, type, row) {
+                          		return '<a href="browser.php?cpg='+row.cpg+'" class="center"><img src="images/business-chart.png" height="16" width="16" alt="Browse" /></a>';
+                          	};
+					dyn_cols.push(item);
 					for (index = 0; index < allcols.length; ++index) {
     					item = {};
     					item ["data"] = allcols[index];
@@ -352,13 +320,15 @@
     					// 	item ["render"] = function (data, type, row) {
          //                  		return (data === true) ? 'true' : 'false';}
          //                  	}
-                        if (allcols[index] == 'rsid') {
-                        	item ["render"] = function (data, type, row) {
-                          		return '<a href="browser.php?cpg='+row.cpg+'" class="dalliance">' + data + '</a>';
-                          	}
-                        }
+						// Add link to RSID column
+                        //if (allcols[index] == 'rsid') {
+                        //	item ["render"] = function (data, type, row) {
+                        //  		return '<a href="browser.php?cpg='+row.cpg+'" class="dalliance">' + data + '</a>';
+                        //  	}
+                        //}
 						dyn_cols.push(item);
-					}	
+					}
+					
 
 					if (! /^(?![rs|cg|chr\d:|\d:]).*$/.test(query) ) {
 						var columns = dyn_cols;
@@ -406,9 +376,10 @@
 							 	'Expires': '0'
 							}
 				        },
+						 order: [[ 1, 'asc' ]],
 				         "columns": dyn_cols,
 				         "columnDefs": [
-						    { "width": "10%", "targets": 0 }
+						    { "orderable": false, "width": "5%", "targets": 0 }
 						  ],
 				        lengthMenu: [
 				            [ 10, 25, 50, 100 ],

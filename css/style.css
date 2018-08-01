@@ -1420,3 +1420,8 @@ table.dataTable.display tbody tr:hover>.sorting_1, table.dataTable.order-column.
 	border-radius: 3px;
 	padding: 5px 0 5px 5px;
 }
+
+.center {
+	text-align: center;
+    display: block;
+}

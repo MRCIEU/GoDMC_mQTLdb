@@ -33,6 +33,37 @@ include 'header.php';
 			</div>
 		</section>
 
+		<section id="one" class="wrapper style1">
+			<header class="major">
+				<p>More information about GoDMC can be found on the <a href="http://godmc.org.uk/">project website</a></p>
+			</header>
+			<!--<div class="container">
+				<div class="row">
+					<div class="4u">
+						<section class="special box">
+							<i class="icon fa-area-chart major"></i>
+							<h3>Justo placerat</h3>
+							<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
+						</section>
+					</div>
+					<div class="4u">
+						<section class="special box">
+							<i class="icon fa-refresh major"></i>
+							<h3>Blandit quis curae</h3>
+							<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
+						</section>
+					</div>
+					<div class="4u">
+						<section class="special box">
+							<i class="icon fa-cog major"></i>
+							<h3>Amet sed accumsan</h3>
+							<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
+						</section>
+					</div>
+				</div>
+			</div>-->
+		</section>
+
 <?php 
 include 'footer.php';
 ?>

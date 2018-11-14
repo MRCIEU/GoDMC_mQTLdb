@@ -40,7 +40,7 @@
 			<section id="main" class="wrapper style1">
 				<header class="major">
 					<h2>GoDMC Search</h2>
-					<form action="<?php echo $hosturi; ?>/search-results.php" name="searchform" id="searchform" method="get">
+					<form action="<?php echo $hosturi; ?>/search.php" name="searchform" id="searchform" method="get">
 						<div class="input-group" id="search-box">
 							<textarea class="form-control" placeholder="Search the GoDMC database" id="search" name="query"><?php echo $query; ?></textarea>
 			                

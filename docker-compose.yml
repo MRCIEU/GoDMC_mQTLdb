@@ -1,7 +1,8 @@
-version: "3"
+version: "2"
 services:
   godmc_webapp:
     image: godmc_mqtldb
     ports:
      - "8777:80"
-
+    volumes:
+        - ./:/var/www/html/

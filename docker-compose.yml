@@ -1,0 +1,7 @@
+version: "3"
+services:
+  godmc_webapp:
+    image: godmc_mqtldb
+    ports:
+     - "8777:80"
+

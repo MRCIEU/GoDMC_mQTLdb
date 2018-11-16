@@ -32,7 +32,10 @@ if ($dirname != '/') {
 		
 	</head>
 	<body id="top">
-
+	<script type='text/javascript'>
+    window.cookieconsent_options = {'message':'This website uses cookies to ensure you get the best experience on our website','dismiss':'Got it!','learnMore':'More info','link':null,'theme':'dark-bottom'};
+</script>
+<script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js'></script>
 		<!-- Header -->
 			<header id="header" class="skel-layers-fixed">
 				<h1><a href="index.php">GoDMC</a></h1>

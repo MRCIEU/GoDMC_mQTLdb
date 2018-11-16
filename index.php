@@ -1,3 +1,6 @@
+<?php
+require_once('authenticate.php');
+?>
 <?php 
 include 'header.php';
 
@@ -11,7 +14,7 @@ include 'header.php';
 				<form action="<?php echo $hosturi; ?>/search" name="searchform" id="searchform" method="get">
 					<div class="input-group" id="search-box">
 		                <!-- <input type="text" class="form-control" placeholder="Search the GoDMC database" id="search" name="query"> -->
-		                <textarea class="form-control" placeholder="Search the GoDMC database" id="search" name="query"></textarea>
+		                <input class="form-control" placeholder="Search the GoDMC database" id="search" name="query" style="width:100%;">
 		                <span class="input-group-btn">
 		                    <button class="btn btn-default" type="submit" id="search-button">
 		                        <span class="glyphicon glyphicon-search"></span>
@@ -20,14 +23,12 @@ include 'header.php';
 		            </div>
 		            <div class="examples">
 		                <strong>Possible searches:</strong>
-		                <ul>
-		                	<li>SNP name: e.g. <a href="<?php echo $hosturi; ?>/search?query=rs7105015" data-original-title="" title="">rs7105015</a></li>
-		                	<li>CpG name: e.g. <a href="<?php echo $hosturi; ?>/search?query=cg24851651" data-original-title="" title="">cg24851651</a></li>
-		                	<li>Chromosome position: e.g. <a href="<?php echo $hosturi; ?>/search?query=1:160000" data-original-title="" title="">1:160000</a></li>
-		                	<li>Chromosome range: e.g. <a href="<?php echo $hosturi; ?>/search?query=cpg:6:160000-250000" data-original-title="" title="">cpg:6:16000000-25000000</a></li>
-		                	<li>Gene name: e.g. <a href="<?php echo $hosturi; ?>/search?query=A1BG" data-original-title="" title="">A1BG</a></li>
-		                	<li>Search on multiple variables by entering on separate lines or delimit with a comma: e.g. <a href="<?php echo $hosturi; ?>/search?query=cg19104072,cg16950941" data-original-title="" title="">cg19104072,cg16950941</a></li>
-		                </ul>
+		                <a href="<?php echo $hosturi; ?>/search?query=rs7105015" data-original-title="" title="SNP">rs7105015</a>, 
+						<a href="<?php echo $hosturi; ?>/search?query=cg24851651" data-original-title="" title="CpG site">cg24851651</a>,
+						<a href="<?php echo $hosturi; ?>/search?query=1:160000" data-original-title="" title="Chromosome position">1:160000</a>,
+						<a href="<?php echo $hosturi; ?>/search?query=cpg:6:160000-250000" data-original-title="" title="Chromosome range around CpG (or SNP)">cpg:6:16000000-25000000</a>,
+						<a href="<?php echo $hosturi; ?>/search?query=A1BG" data-original-title="" title="Gene name">A1BG</a>,
+						<a href="<?php echo $hosturi; ?>/search?query=cg19104072,cg16950941" data-original-title="" title="Search on multiple comma-delimited variables">cg19104072,cg16950941</a>
 		            </div>
 				</form>
 			</div>

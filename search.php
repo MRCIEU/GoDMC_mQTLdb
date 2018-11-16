@@ -1,4 +1,7 @@
 <?php
+require_once('authenticate.php');
+?>
+<?php
 	include 'header.php';
 	include 'datatables_inc.php';
 ?>
@@ -42,7 +45,7 @@
 					<h2>GoDMC Search</h2>
 					<form action="<?php echo $hosturi; ?>/search.php" name="searchform" id="searchform" method="get">
 						<div class="input-group" id="search-box">
-							<textarea class="form-control" placeholder="Search the GoDMC database" id="search" name="query"><?php echo $query; ?></textarea>
+							<input class="form-control" placeholder="Search the GoDMC database" id="search" name="query" style="width:100%;"><?php echo $query; ?>
 			                
 			                <span class="input-group-btn">
 			                    <button class="btn btn-default" type="submit" id="search-button">

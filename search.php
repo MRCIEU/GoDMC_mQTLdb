@@ -45,7 +45,7 @@ require_once('authenticate.php');
 					<h2>GoDMC Search</h2>
 					<form action="<?php echo $hosturi; ?>/search.php" name="searchform" id="searchform" method="get">
 						<div class="input-group" id="search-box">
-							<input class="form-control" placeholder="Search the GoDMC database" id="search" name="query" style="width:100%;"><?php echo $query; ?>
+							<input class="form-control" placeholder="Search the GoDMC database" id="search" name="query" style="width:100%;" value="<?php echo $query; ?>">
 			                
 			                <span class="input-group-btn">
 			                    <button class="btn btn-default" type="submit" id="search-button">
@@ -99,7 +99,11 @@ require_once('authenticate.php');
 										  	<option value="0"<?php echo ($clumped == '0' ? 'selected="selected"' : ''); ?>>No</option>
 										</select>
 									</div>
-
+									<p>
+										<button class="btn btn-default" type="submit" id="search-button">
+											Apply
+										</button>
+									</p>
 					            </div>
 							</div>
 						</div>
@@ -130,6 +134,11 @@ require_once('authenticate.php');
 												
 											}
 										?>
+									<p>
+										<button class="btn btn-default" type="submit" id="search-button">
+											Apply
+										</button>
+									</p>
 								</div>
 							</div>
 						</div>

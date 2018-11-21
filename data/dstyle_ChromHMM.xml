@@ -8,6 +8,7 @@
             <FGCOLOR>black</FGCOLOR>
             <BGCOLOR>blue</BGCOLOR>
             <BUMP>yes</BUMP>
+            <BGITEM>yes</BGITEM>
           </BOX>
         </GLYPH>
       </TYPE>

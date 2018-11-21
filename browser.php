@@ -81,6 +81,12 @@ if (intval($start) < 1) {
                                                                 stylesheet_uri:  '<?php echo $hosturi; ?>/data/dstyle_xWAShits.xml',
                                                                 },
 
+                                                                {name:                 'ChromHMM',
+                                                                desc:                 'Chromatin state from ChromHMM',
+                                                                bwgURI:               '<?php echo $hosturi; ?>/data/gm12878.ChromHMM.bb',
+                                                                stylesheet_uri:  '<?php echo $hosturi; ?>/data/dstyle_ChromHMM.xml',
+                                                                },
+
 							   {	name:                 'Repeats',
 									desc:                 'Repeat annotation from Ensembl',
 									bwgURI:               '//www.biodalliance.org/datasets/repeats.bb',

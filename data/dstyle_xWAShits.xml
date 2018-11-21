@@ -1,0 +1,14 @@
+<DASSTYLE>
+  <STYLESHEET>
+    <CATEGORY id="default">
+      <TYPE id='default'>
+        <GLYPH>
+          <PLIMSOLL>
+            <FGCOLOR>blue</FGCOLOR>
+            <BGCOLOR>yellow</BGCOLOR>
+          </PLIMSOLL>
+        </GLYPH>
+      </TYPE>
+    </CATEGORY>
+  </STYLESHEET>
+</DASSTYLE>

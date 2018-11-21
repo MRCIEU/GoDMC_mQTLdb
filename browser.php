@@ -69,6 +69,18 @@ if (intval($start) < 1) {
 									collapseSuperGroups:  true,
 									trixURI:              '//www.biodalliance.org/datasets/geneIndex.ix'},
 
+                                                                {name:                 'GWAS catalog',
+                                                                desc:                 'Hits from the NHGRI-EBI GWAS catalog',
+                                                                bwgURI:               '//mqtldb.godmc.org.uk/data/gwasCatalog_sorted.bb',
+                                                                stylesheet_uri:  '//mqtldb.godmc.org.uk/data/dstyle_xWAShits.xml',
+                                                                },
+
+                                                                {name:                 'EWAS catalog',
+                                                                desc:                 'Hits from the MRC-IEU EWAS catalog',
+                                                                bwgURI:               '<?php echo $hosturi; ?>/data/ewasCatalog_sorted.bb',
+                                                                stylesheet_uri:  '<?php echo $hosturi; ?>/data/dstyle_xWAShits.xml',
+                                                                },
+
 							   {	name:                 'Repeats',
 									desc:                 'Repeat annotation from Ensembl',
 									bwgURI:               '//www.biodalliance.org/datasets/repeats.bb',

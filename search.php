@@ -127,9 +127,9 @@ require_once('authenticate.php');
 												if (in_array($col,$cols)) $checked = 'checked="checked"';						
 
 												if ($table == 'chrpos' and in_array($col, ['name'])) {
-													echo '<input type="checkbox" name="columns[]" value="'.$col.'" id="'.$col.'chk" disabled="disabled" '.$checked.'><label for="'.$col.'chk">'.$col.'</label>';
+													echo '<input type="checkbox" class="filtercheck" name="columns[]" value="'.$col.'" id="'.$col.'chk" disabled="disabled" '.$checked.'><label for="'.$col.'chk">'.$col.'</label>';
 												} else {
-													echo '<input type="checkbox" name="columns[]" value="'.$col.'" id="'.$col.'chk" '.$checked.'><label for="'.$col.'chk">'.$col.'</label>';	
+													echo '<input type="checkbox" class="filtercheck" name="columns[]" value="'.$col.'" id="'.$col.'chk" '.$checked.'><label for="'.$col.'chk">'.$col.'</label>';	
 												}
 												
 											}

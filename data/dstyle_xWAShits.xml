@@ -1,7 +1,7 @@
 <DASSTYLE>
   <STYLESHEET>
     <CATEGORY id="default">
-      <TYPE id='default'>
+      <TYPE id='bigbed'>
         <GLYPH>
           <PLIMSOLL>
             <FGCOLOR>blue</FGCOLOR>

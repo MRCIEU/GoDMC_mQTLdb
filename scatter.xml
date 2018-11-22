@@ -1,13 +1,12 @@
 <TYPE id='default'>
   <GLYPH>
-    <DOT>
+    <PLIMSOLL>
       <SCATTER>yes</SCATTER>
-      <POINTS>8</POINTS>
-      <SIZE>2</SIZE>
+      <SIZE>5</SIZE>
       <FGCOLOR>blue</FGCOLOR>
       <MIN>0</MIN>
       <MAX>250</MAX>
       <HEIGHT>50</HEIGHT>
-    </DOT>
+    </PLIMSOLL>
   </GLYPH>
 </TYPE>

@@ -62,17 +62,18 @@ if (intval($start) < 1) {
 									twoBitURI:            '//www.biodalliance.org/datasets/hg38.2bit',
 									tier_type:            'sequence'},
 
-								{	name:                 'Genes',
-									desc:                 'Gene structures from GENCODE 19',
-									bwgURI:               '//www.biodalliance.org/datasets/gencode.bb',
-									stylesheet_uri:       '//www.biodalliance.org/stylesheets/gencode.xml',
-									collapseSuperGroups:  true,
-									trixURI:              '//www.biodalliance.org/datasets/geneIndex.ix'},
+                                                                {name:                 'mQTL for <?php echo $query; ?>',
+                                                                desc:                 '<?php echo $query; ?>',
+                                                                //uri:               '<?php echo $hosturi; ?>/data/<?php echo $query; ?>.bed',
+                                                                uri:               'http://api.godmc.org.uk/v0.1/dl/bed/cpg/<?php echo $query; ?>',
+                                                                tier_type:                        'memstore',
+                                                                stylesheet_uri:  '<?php echo $hosturi; ?>/scatter.xml',
+                                                                payload:                          'bed'},
 
                                                                 {name:                 'GWAS catalog',
                                                                 desc:                 'Hits from the NHGRI-EBI GWAS catalog',
-                                                                bwgURI:               '//mqtldb.godmc.org.uk/data/gwasCatalog_sorted.bb',
-                                                                stylesheet_uri:  '//mqtldb.godmc.org.uk/data/dstyle_xWAShits.xml',
+                                                                bwgURI:               '<?php echo $hosturi; ?>/data/gwasCatalog_sorted.bb',
+                                                                stylesheet_uri:  '<?php echo $hosturi; ?>/data/dstyle_GWAShits.xml',
                                                                 },
 
                                                                 {name:                 'EWAS catalog',
@@ -103,13 +104,17 @@ if (intval($start) < 1) {
 //									collapseSuperGroups:  true,
 //                   				},
 								
-								{name:                 '<?php echo $query; ?>',
-								desc:                 '<?php echo $query; ?>', 
-								//uri:               '<?php echo $hosturi; ?>/data/<?php echo $query; ?>.bed',
-								uri:               'http://api.godmc.org.uk/v0.1/dl/bed/cpg/<?php echo $query; ?>',
-								tier_type: 			  'memstore',
-								stylesheet_uri:  '<?php echo $hosturi; ?>/scatter.xml',
-								payload: 			  'bed'},
+
+                                                                {       name:                 'Genes',
+                                                                        desc:                 'Gene structures from GENCODE 19',
+                                                                        bwgURI:               '//www.biodalliance.org/datasets/gencode.bb',
+                                                                        stylesheet_uri:       '//www.biodalliance.org/stylesheets/gencode.xml',
+                                                                        collapseSuperGroups:  true,
+                                                                        trixURI:              '//www.biodalliance.org/datasets/geneIndex.ix'
+                                                                },
+
+
+
                    			],
 							
 							

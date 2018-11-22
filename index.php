@@ -27,7 +27,7 @@ include 'header.php';
 						<a href="<?php echo $hosturi; ?>/search?query=cg24851651" data-original-title="" title="CpG site">cg24851651</a>,
 						<a href="<?php echo $hosturi; ?>/search?query=1:160000" data-original-title="" title="Chromosome position">1:160000</a>,
 						<a href="<?php echo $hosturi; ?>/search?query=cpg:6:160000-250000" data-original-title="" title="Chromosome range around CpG (or SNP)">cpg:6:16000000-25000000</a>,
-						<a href="<?php echo $hosturi; ?>/search?query=A1BG" data-original-title="" title="Gene name">A1BG</a>,
+						<!-- <a href="<?php echo $hosturi; ?>/search?query=A1BG" data-original-title="" title="Gene name">A1BG</a>, -->
 						<a href="<?php echo $hosturi; ?>/search?query=cg19104072,cg16950941" data-original-title="" title="Search on multiple comma-delimited variables">cg19104072,cg16950941</a>
 		            </div>
 				</form>

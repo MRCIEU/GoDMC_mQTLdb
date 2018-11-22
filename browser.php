@@ -42,6 +42,7 @@ if (intval($start) < 1) {
 						    viewStart:    <?php echo $start; ?>,
 						    viewEnd:      <?php echo $end; ?>,
 						    cookieKey:    'human-grc_h37',
+                                                    maxHeight:    '600',
 							
 						//	chr:          '3',
 						//    viewStart:    16853842,

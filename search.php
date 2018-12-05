@@ -156,7 +156,7 @@ require_once('authenticate.php');
 				                <tr>
 				                <?php 
 				                	if ($table == 'default') :
-										echo "<th>&nbsp;</th>";
+										echo "<th>Browser</th>";
 					                	$min_cols = array("rsid","a1","a2","name");
 					                	if (isset($_GET['columns'])) {
 					                		$colarray = $_GET['columns'];
@@ -169,7 +169,8 @@ require_once('authenticate.php');
 					                		echo "<th>{$column}</th>";
 					                	} 
 					                elseif ($table == 'chrpos') :
-					                	$min_cols = array("rsid","a1","a2","name");
+					                	                echo "<th>Browser</th>";
+								$min_cols = array("rsid","a1","a2","name");
 					                	if (isset($_GET['columns'])) {
 					                		$colarray = $_GET['columns'];
 					                		$all_cols = array_merge($min_cols, $colarray);

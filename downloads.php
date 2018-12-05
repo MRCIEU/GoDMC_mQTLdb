@@ -14,15 +14,11 @@ include 'header.php';
 				<div class="container">
 					<section>
 				<p>Downloads are supported using the GoDMC mQTLdb application programming interface (API). This is easily accessed using R, as demonstrated in the following example:</p>						
-            
-				<pre>
-					<code>if(!require(jsonlite)){
+				<pre><code>if(!require(jsonlite)){
     install.packages("jsonlite")
 }
 library(jsonlite)
-mqtl_data <- fromJSON("http://api.godmc.org.uk/v0.1/assoc_meta/cpg/cg17242362")</code>
-				</pre>
-				<hr>
+mqtl_data <- fromJSON("http://api.godmc.org.uk/v0.1/assoc_meta/cpg/cg17242362")</code></pre>
 					<p>This is an API which is used to pull down results from the GoDMC meta analysis of genetic influences on DNA methylation levels.</p>
 					<p>Most methods are using <code>get</code> - you put in a specific query and the result is returned</p>
 					<p>There are also more complex queries that can be obtained using <code>post</code>. Here a json file needs to be built that describes the query</p>
@@ -30,8 +26,7 @@ mqtl_data <- fromJSON("http://api.godmc.org.uk/v0.1/assoc_meta/cpg/cg17242362")<
 					<hr>
 					<h2><a id="user-content-get-a-list-of-all-cohorts" class="anchor" aria-hidden="true" href="#get-a-list-of-all-cohorts">
 					</a>Get a list of all cohorts</h2>
-					<pre><code>/v0.1/cohorts
-					</code></pre>
+					<pre><code>/v0.1/cohorts</code></pre>
 					<p>e.g. <a href="http://api.godmc.org.uk/v0.1/cohorts" rel="nofollow">http://api.godmc.org.uk/v0.1/cohorts</a></p>
 					<hr>
 					<h2><a id="user-content-get-mqtls-for-a-specific-snp-or-cpg" class="anchor" aria-hidden="true" href="#get-mqtls-for-a-specific-snp-or-cpg">
@@ -70,8 +65,7 @@ mqtl_data <- fromJSON("http://api.godmc.org.uk/v0.1/assoc_meta/cpg/cg17242362")<
 					<hr>
 					<h2><a id="user-content-get-information-about-a-snp-cpg-or-gene" class="anchor" aria-hidden="true" href="#get-information-about-a-snp-cpg-or-gene">
 					</a>Get information about a SNP, CpG or gene</h2>
-					<pre><code>/v0.1/info/&lt;attribute&gt;/&lt;item&gt;
-					</code></pre>
+					<pre><code>/v0.1/info/&lt;attribute&gt;/&lt;item&gt;</code></pre>
 					<p>e.g. <a href="http://api.godmc.org.uk/v0.1/info/cpg/cg26866020" rel="nofollow">http://api.godmc.org.uk/v0.1/info/cpg/cg26866020</a></p>
 					<p>e.g. <a href="http://api.godmc.org.uk/v0.1/info/gene/A1BG" rel="nofollow">http://api.godmc.org.uk/v0.1/info/gene/A1BG</a></p>
 					<p>e.g. <a href="http://api.godmc.org.uk/v0.1/info/rsid/rs234" rel="nofollow">http://api.godmc.org.uk/v0.1/info/rsid/rs234</a></p>
@@ -85,29 +79,29 @@ mqtl_data <- fromJSON("http://api.godmc.org.uk/v0.1/assoc_meta/cpg/cg17242362")<
 					<hr>
 					<p>Query multiple SNPs, <code>test.json</code>:</p>
 					<div class="highlight highlight-source-json"><pre>{
-					    <span class="pl-s"><span class="pl-pds">"</span>snps<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>chr10:100003302:SNP<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>chr10:99954538:INDEL<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>chr10:99981275:SNP<span class="pl-pds">"</span></span>]
-					}</pre></div>
+    <span class="pl-s"><span class="pl-pds">"</span>snps<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>chr10:100003302:SNP<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>chr10:99954538:INDEL<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>chr10:99981275:SNP<span class="pl-pds">"</span></span>]
+}</pre></div>
 					<p>Query multiple rsids, <code>test.json</code>:</p>
 					<div class="highlight highlight-source-json"><pre>{
-					    <span class="pl-s"><span class="pl-pds">"</span>rsids<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>rs6602381<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>rs72828459<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>rs234<span class="pl-pds">"</span></span>]
-					}</pre></div>
+    <span class="pl-s"><span class="pl-pds">"</span>rsids<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>rs6602381<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>rs72828459<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>rs234<span class="pl-pds">"</span></span>]
+}</pre></div>
 					<p>Query multiple CpGs, <code>test.json</code>:</p>
 					<div class="highlight highlight-source-json"><pre>{
-					    <span class="pl-s"><span class="pl-pds">"</span>cpgs<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>cg14380065<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>cg12715136<span class="pl-pds">"</span></span>]
-					}</pre></div>
+    <span class="pl-s"><span class="pl-pds">"</span>cpgs<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>cg14380065<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>cg12715136<span class="pl-pds">"</span></span>]
+}</pre></div>
 					<p>Query mQTLs for rsids and CpGs, (i.e. get all results where an mQTL contains a SNP and a CpG specified in the lists), <code>test.json</code>:</p>
 					<div class="highlight highlight-source-json"><pre>{
-					    <span class="pl-s"><span class="pl-pds">"</span>rsids<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>rs6602381<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>rs72828459<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>rs234<span class="pl-pds">"</span></span>],
-					    <span class="pl-s"><span class="pl-pds">"</span>cpgs<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>cg14380065<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>cg12715136<span class="pl-pds">"</span></span>]
-					}</pre></div>
+    <span class="pl-s"><span class="pl-pds">"</span>rsids<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>rs6602381<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>rs72828459<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>rs234<span class="pl-pds">"</span></span>],
+    <span class="pl-s"><span class="pl-pds">"</span>cpgs<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>cg14380065<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>cg12715136<span class="pl-pds">"</span></span>]
+}</pre></div>
 					<p>As in the third example but set p-value threshold, only return cis effects, return only clumped rows, and specify which columns to return, <code>test.json</code>:</p>
 					<div class="highlight highlight-source-json"><pre>{
-					    <span class="pl-s"><span class="pl-pds">"</span>cpgs<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>cg02518338<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>cg12715136<span class="pl-pds">"</span></span>],
-					    <span class="pl-s"><span class="pl-pds">"</span>pval<span class="pl-pds">"</span></span>: <span class="pl-c1">1e-10</span>,
-					    <span class="pl-s"><span class="pl-pds">"</span>cistrans<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>cis<span class="pl-pds">"</span></span>,
-					    <span class="pl-s"><span class="pl-pds">"</span>clumped<span class="pl-pds">"</span></span>: <span class="pl-c1">1</span>,
-					    <span class="pl-s"><span class="pl-pds">"</span>columns<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>pval, cpg, cistrans, clumped<span class="pl-pds">"</span></span>
-					}</pre></div>
+    <span class="pl-s"><span class="pl-pds">"</span>cpgs<span class="pl-pds">"</span></span>: [<span class="pl-s"><span class="pl-pds">"</span>cg02518338<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>cg12715136<span class="pl-pds">"</span></span>],
+    <span class="pl-s"><span class="pl-pds">"</span>pval<span class="pl-pds">"</span></span>: <span class="pl-c1">1e-10</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>cistrans<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>cis<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>clumped<span class="pl-pds">"</span></span>: <span class="pl-c1">1</span>,
+    <span class="pl-s"><span class="pl-pds">"</span>columns<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>pval, cpg, cistrans, clumped<span class="pl-pds">"</span></span>
+}</pre></div>
 					<p>Note that if the <code>clumped</code> and <code>cistrans</code> fields are not set then no filtering is done. If <code>clumped = 0</code> then only the unclumped results are returned. If <code>cistrans = ""</code> then both cis and trans results are returned. Similarly, if the <code>pval</code> field is not set then no filter is applied.</p>
 
 

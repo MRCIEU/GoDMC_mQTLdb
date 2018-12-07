@@ -15,7 +15,7 @@ include 'header.php';
 					<section>
 						<p>The GoDMC phase 2 meta analysis results are available for download here:</p>
 						<p><ul>
-							<li><a href="/path/to/assoc_meta_all.csv.gz" download>assoc_meta_all.csv.gz</a> 8Gb</li>
+							<li><a href="/path/to/assoc_meta_all.csv.gz" download>assoc_meta_all.csv.gz</a> 5.9Gb</li>
 							<li><a href="/path/to/assoc_meta_all.csv.gz.md5" download>assoc_meta_all.csv.gz.md5</a></li>
 						</ul></p>
 

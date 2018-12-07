@@ -21,7 +21,7 @@ include 'header.php';
 
 						<p>These data, along with richer information regarding SNP and chromosome positions can be accessed programmatically via a RESTful API, full details are available here:</p>
 						<p><ul>
-							<li><a href="http://api.godmc.org.uk/v0.1/">http://api.godmc.org.uk/v0.1/</a></li>
+							<li><a href="http://api.godmc.org.uk/v0.1">http://api.godmc.org.uk/v0.1</a></li>
 						</ul></p>
 						<p>In addition, follow up analyses including enrichments, colocalisations and MR can be queried programmatically through a Neo4j graph database:</p>
 						<p><ul>

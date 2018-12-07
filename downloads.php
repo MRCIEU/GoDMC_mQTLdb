@@ -25,9 +25,9 @@ include 'header.php';
 						</ul></p>
 						<p>In addition, follow up analyses including enrichments, colocalisations and MR can be queried programmatically through a Neo4j graph database:</p>
 						<p><ul>
-							<li>Web interface: <a href="http://shark.epi.bris.ac.uk:27600">http://shark.epi.bris.ac.uk:27600</a></li>
-							<li>Bolt connection: <a href="bolt://shark.epi.bris.ac.uk:27601">bolt://shark.epi.bris.ac.uk:27601</a></li>
-						</ul></p>
+							<li>Web interface: <a href="http://hostname:port">hostname:port</a></li>
+							<li>Bolt connection: <a href="bolt://hostname:port">hostname:port</a></li>
+						</ul></p> 
 					</section>
 				</div>
 			</section>

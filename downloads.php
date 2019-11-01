@@ -19,12 +19,14 @@ include 'header.php';
 							<li><a href="/path/to/assoc_meta_all.csv.gz" download>assoc_meta_all.csv.gz</a> 5.9Gb</li>
 							<li><a href="/path/to/assoc_meta_all.csv.gz.md5" download>assoc_meta_all.csv.gz.md5</a></li>
 						</ul></p>
-						<p>Replication analysis of all independent top hits from the discovery were performed in the Generation Scotland data comprising 5101 participants:
+						<p>Replication analysis of all independent top hits from the discovery were performed in the Generation Scotland data comprising 5101 participants:</p>
 						<p><ul>
 							<li><a href="/path/to/replication.csv.gz" download>replication.csv.gz</a> 5.9Gb</li>
 							<li><a href="/path/to/replication.csv.gz.md5" download>replication.csv.gz.md5</a></li>
 						</ul></p>
-
+					</section>
+					<section>
+						<h3>Interfaces</h3>
 						<p>These data, along with richer information regarding SNP and chromosome positions can be accessed programmatically via a RESTful API, full details are available here:</p>
 						<p><ul>
 							<li><a href="http://api.godmc.org.uk/v0.1">http://api.godmc.org.uk/v0.1</a></li>

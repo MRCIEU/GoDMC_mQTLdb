@@ -1126,6 +1126,7 @@ table #results {  }
     display: table;
     border-collapse: separate;
     width: 50%;
+    height: 10px;
     margin: 0 auto 0 auto;
 }
 
@@ -1140,8 +1141,9 @@ table #results {  }
 .input-group .form-control {
     position: relative;
     z-index: 2;
-    float: left;
-    margin-bottom: 0;
+    float: right;
+    padding-left: 10px;
+    margin-bottom: -10;
 }
 input[type="text"].form-control, textarea.form-control {
     display: block;
@@ -1269,13 +1271,16 @@ textarea.form-control {
 }
 
 .examples {
-	background: rgb(220,220,220,0.8);
+	/*background: rgb(220,220,220,0.8);*/
     width: 50%;
     margin: 1em auto;
     padding: 1em;
     border-radius: 2px;
     font-size: 0.9em;
     display: inline-block;
+    color: white;
+
+
 }
 
 .examples ul {
@@ -1287,6 +1292,16 @@ textarea.form-control {
 .examples ul li {
 	text-align: left;
 	margin-left: 0;
+	text-decoration: none;
+}
+
+.examples a {
+	color: white;
+	background-color: grey;
+	border-radius: 3px;
+	padding: 3px;
+	text-decoration: none;
+
 }
 
 .container {

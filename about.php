@@ -12,14 +12,21 @@ include 'header.php';
 					<section>
 						
             <h3>Description of the resource</h3>
+	            <p>The results from the GoDMC analysis are made available here. We systematically mapped the cis and trans acting genetic influences on DNA methylation using 36 cohorts totalling 27,750 European samples in whole blood. A total of 420,509 DNAm sites were analysed using 10 million common variants. To manage the size of the summary data, the analysis was performed in two stages. In the first stage 22 cohorts searched for all cis and trans effects that were putatively associated at p < 1e-4. In the second stage, 36 cohorts all analysed the putative associations from stage one. The summary data from the second stage were meta analysed and are the basis of the results that can be queried on this website.
+				</p>
+				<p>More information about GoDMC can be found on the <a href="http://godmc.org.uk/">project website</a>, including information on how to make project proposals to add to the resource.</p>
+				<br/>
 
             <h3>Contacts</h3>
-            <p>For general enquiries and to join GoDMC please contact the GoDMC co-ordinator: (<a href="mailto:josine.min@bristol.ac.uk">josine.min@bristol.ac.uk</a>)</p>
+            	<p>For general enquiries and to join GoDMC please contact the GoDMC co-ordinator: (<a href="mailto:josine.min@bristol.ac.uk">josine.min@bristol.ac.uk</a>)
+            	</p>
 
-            <h3>FAQ</h3>
+
+            	<br/>
 
             <h3>Publications / Citing the resource</h3>
-
+            	<p>These results are currently under review, and a draft manuscript will be uploaded to Biorxiv shortly.
+            	</p>
 
 
 

@@ -9,8 +9,7 @@ include 'header.php';
 		<!-- Banner -->
 		<section id="banner">
 			<div class="inner">
-				<h2>GoDMC Database</h2>
-				<p style="width: 50%; margin-left: auto; margin-right: auto">Genetics of DNA Methylation Consortium (GoDMC)</p>
+				<p><i>Cis</i> and <i>trans</i> meta-analysis results from genome-wide scans of 420,509 DNA methylation sites</p>
 				<form action="<?php echo $hosturi; ?>/search" name="searchform" id="searchform" method="get">
 					<div class="input-group" id="search-box">
 		                <!-- <input type="text" class="form-control" placeholder="Search the GoDMC database" id="search" name="query"> -->
@@ -22,22 +21,22 @@ include 'header.php';
 		                </span>
 		            </div>
 		            <div class="examples">
-		                <strong>Possible searches:</strong>
-		                <a href="<?php echo $hosturi; ?>/search?query=rs7105015" data-original-title="" title="SNP">rs7105015</a>, 
-						<a href="<?php echo $hosturi; ?>/search?query=cg24851651" data-original-title="" title="CpG site">cg24851651</a>,
-						<a href="<?php echo $hosturi; ?>/search?query=1:160000" data-original-title="" title="Chromosome position">1:160000</a>,
-						<a href="<?php echo $hosturi; ?>/search?query=cpg:6:160000-250000" data-original-title="" title="Chromosome range around CpG (or SNP)">cpg:6:16000000-25000000</a>,
+		                Example searches:<br/>
+		                <a href="<?php echo $hosturi; ?>/search?query=rs7105015" data-original-title="" title="SNP">rs7105015</a> <br/>
+						<a href="<?php echo $hosturi; ?>/search?query=snp:6:16000000-17000000" data-original-title="" title="Chromosome position">snp:6:16000000-17000000</a><br/>
+						<a href="<?php echo $hosturi; ?>/search?query=cg24851651" data-original-title="" title="CpG site">cg24851651</a><br/>
+						<a href="<?php echo $hosturi; ?>/search?query=cpg:6:16000000-25000000" data-original-title="" title="Chromosome range around CpG (or SNP)">cpg:6:16000000-17000000</a><br/>
 						<!-- <a href="<?php echo $hosturi; ?>/search?query=A1BG" data-original-title="" title="Gene name">A1BG</a>, -->
 						<a href="<?php echo $hosturi; ?>/search?query=cg19104072,cg16950941" data-original-title="" title="Search on multiple comma-delimited variables">cg19104072,cg16950941</a>
 		            </div>
 				</form>
 			</div>
 		</section>
-
 		<section id="one" class="wrapper style1">
-			<header class="major">
-				<p>More information about GoDMC can be found on the <a href="http://godmc.org.uk/">project website</a></p>
-			</header>
+					
+
+		</section>
+		<section id="one" class="wrapper style1">
 			<!--<div class="container">
 				<div class="row">
 					<div class="4u">

@@ -44,7 +44,8 @@ if ($dirname != '/') {
 						<li><a href="index">Home</a></li>
 						<li><a href="search">Search</a></li>
 						<li><a href="cohorts">Cohorts</a></li>
-						<li><a href="downloads">Downloads</a></li>
+						<li><a href="downloads">Resources</a></li>
+						<li><a href="http://api.godmc.org.uk/v0.1">API</a></li>
 						<li><a href="about">About</a></li>
 					</ul>
 				</nav>

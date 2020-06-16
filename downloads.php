@@ -18,6 +18,7 @@ include 'header.php';
 						<p><ul>
 							<li><a href="http://fileserve.mrcieu.ac.uk/mqtl/assoc_meta_all.csv.gz" download>assoc_meta_all.csv.gz</a> 5.9Gb</li>
 							<li><a href="http://fileserve.mrcieu.ac.uk/mqtl/assoc_meta_all.csv.gz.md5" download>assoc_meta_all.csv.gz.md5</a></li>
+							<li><a href="http://fileserve.mrcieu.ac.uk/mqtl/README">README</a></li>
 						</ul></p>
 <!-- 						<p>Replication analysis of all independent top hits from the discovery were performed in the Generation Scotland data comprising 5101 participants:</p>
 						<p><ul>

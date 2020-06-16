@@ -32,12 +32,12 @@ include 'header.php';
 				</form>
 			</div>
 		</section>
-		<section id="one" class="wrapper style1">
+<!-- 		<section id="one" class="wrapper style1">
 					
 
 		</section>
 		<section id="one" class="wrapper style1">
-			<!--<div class="container">
+ -->			<!--<div class="container">
 				<div class="row">
 					<div class="4u">
 						<section class="special box">
@@ -62,7 +62,7 @@ include 'header.php';
 					</div>
 				</div>
 			</div>-->
-		</section>
+		<!-- </section> -->
 
 <?php 
 include 'footer.php';

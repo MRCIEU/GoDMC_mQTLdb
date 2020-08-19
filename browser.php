@@ -1,6 +1,3 @@
-<?php
-require_once('authenticate.php');
-?>
 <?php 
 include 'header.php';
 ini_set("auto_detect_line_endings", true);

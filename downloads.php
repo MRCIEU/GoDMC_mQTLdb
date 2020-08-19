@@ -1,6 +1,3 @@
-<?php
-require_once('authenticate.php');
-?>
 <?php 
 include 'header.php';
 ?>

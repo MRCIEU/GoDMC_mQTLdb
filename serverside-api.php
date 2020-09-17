@@ -57,14 +57,12 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
     
     if (isset($_GET['cistrans']) && $_GET['cistrans'] != '') { 
         $cistrans = $_GET['cistrans'];
-        $all_data['cistrans'] = array();
-        array_push($all_data['cistrans'], $cistrans);
+        $all_data['cistrans'] = $cistrans;
     }
 
     if (isset($_GET['clumped']) && $_GET['clumped'] != '') { 
         $clumped = $_GET['clumped'];
-        $all_data['clumped'] = array();
-        array_push($all_data['clumped'], $clumped);
+        $all_data['clumped'] = $clumped;
     }
 
     if (isset($_GET['columnschoice']) && $_GET['columnschoice'] != '') { 
@@ -140,7 +138,7 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
 
     }
     
-    $data_string = json_encode($all_data);    
+    $data_string = json_encode($all_data);
 
     if ( $assoc_meta == true ) {
         $qdata =  json_decode(CallApi('GET', $url),true);    

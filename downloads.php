@@ -11,12 +11,15 @@ include 'header.php';
 				<div class="container">
 					<section>
 						<h3>Downloads</h3>
-						<p>The GoDMC mQTL meta-analysis results are available for download here:</p>
+						<p>The GoDMC mQTL meta-analysis results are available for download here, as well as information about the variants used in the analysis:</p>
 						<p><ul>
 							<li><a href="http://fileserve.mrcieu.ac.uk/mqtl/assoc_meta_all.csv.gz" download>assoc_meta_all.csv.gz</a> 5.9Gb</li>
 							<li><a href="http://fileserve.mrcieu.ac.uk/mqtl/assoc_meta_all.csv.gz.md5" download>assoc_meta_all.csv.gz.md5</a></li>
+							<li><a href="http://fileserve.mrcieu.ac.uk/mqtl/snps.csv.gz" download>snps.csv.gz</a> 204Mb</li>
+							<li><a href="http://fileserve.mrcieu.ac.uk/mqtl/snps.csv.gz.md5" download>snps.csv.gz.md5</a></li>
 							<li><a href="http://fileserve.mrcieu.ac.uk/mqtl/README">README</a></li>
 						</ul></p>
+
 						<p>We also performed meta analysis of associations of ~25k SNPs (pre-selected based on GWAS catalog etc) against all CpGs. This is a very large amount of data and we are working on making it openly available, likely upon publication. Access can be granted to cohorts on a per-request basis for the time being, please see the <a href="http://godmc.org.uk/projects.html">project proposal page</a> for more information.
 						</p><br/>
 <!-- 						<p>Replication analysis of all independent top hits from the discovery were performed in the Generation Scotland data comprising 5101 participants:</p>

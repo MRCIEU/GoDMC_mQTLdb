@@ -11,3 +11,14 @@ docker build -t godmc_mqtldb .
 docker-compuse up -d
 ```
 
+## Deployment
+
+Currently deployed same as development, by running container on host website, and mounting the directory that contains the code
+
+```
+git clone git@github.com:MRCIEU/GoDMC_mQTLdb.git
+cd GoDMC_mQTLdb
+docker build -t godmc_mqtldb .
+docker-compuse up -d
+```
+

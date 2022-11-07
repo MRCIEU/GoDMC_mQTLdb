@@ -25,9 +25,9 @@ include 'header.php';
             	<br/>
 
             <h3>Publications / Citing the resource</h3>
-            	<p>These results are currently under review, and a draft manuscript will be uploaded to Biorxiv shortly.
+            	<p>Please cite using:
             	</p>
-
+				<p>Min, J.L., Hemani, G. et al. Genomic and phenotypic insights from an atlas of genetic effects on DNA methylation. <i>Nat Genet</i> 53, 1311–1321 (2021). <a href=https://doi.org/10.1038/s41588-021-00923-x>https://doi.org/10.1038/s41588-021-00923-x</a>.</p>
 				<br/>
 				<br/>
 

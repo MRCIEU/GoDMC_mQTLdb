@@ -114,7 +114,7 @@
 											$posscols = array("se_mre", "chunk", "hetchisq", "num_studies", "pval_mre", "samplesize", "beta_a1", "freq_se", "hetpval", "hetisq",  "pval_are", "direction", "cistrans","se_are", "snp", "pval", "tausq", "cpg", "beta_are_a1", "freq_a1", "se", "clumped");
 
 											if (isset($_GET['columns'])) {
-												$cols = $_GET['columns'];
+												$cols = (array) $_GET['columns'];
 											} else {
 												$cols = array();
 											}
@@ -156,7 +156,7 @@
 										echo "<th>Browser</th>";
 					                	$min_cols = array("rsid","a1","a2","name");
 					                	if (isset($_GET['columns'])) {
-					                		$colarray = $_GET['columns'];
+					                		$colarray = (array) $_GET['columns'];
 					                		$all_cols = array_merge($min_cols, $colarray);
 					                	} else {
 					                		$colarray = array("cpg", "beta_a1",  "se", "samplesize", "pval", "cistrans", "clumped", "hetisq", "direction" );	
@@ -169,7 +169,7 @@
 					                	                echo "<th>Browser</th>";
 								$min_cols = array("rsid","a1","a2","name");
 					                	if (isset($_GET['columns'])) {
-					                		$colarray = $_GET['columns'];
+					                		$colarray = (array) $_GET['columns'];
 					                		$all_cols = array_merge($min_cols, $colarray);
 					                	} else {
 					                		$colarray = array("cpg", "beta_a1",  "se", "samplesize", "pval", "cistrans", "clumped", "hetisq", "direction" );

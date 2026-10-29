@@ -38,7 +38,9 @@ function CallAPI($method, $url, $data = false)
     // );                                                                                                                   
                                                                                                                          
     $result = curl_exec($curl);
-    curl_close($curl);
+    if ($result === false) {
+        error_log('CallAPI '.$method.' '.$url.' failed: '.curl_error($curl));
+    }
     return $result;
 } // end function
 
@@ -46,8 +48,9 @@ function CallAPI($method, $url, $data = false)
 $assoc_meta = false;
 $info = false;
 
-if (isset($_GET['query']) && $_GET['query'] != '') { 
+if (isset($_GET['query']) && $_GET['query'] != '') {
     $query = $_GET['query'];
+    $all_data = array();
 
     if (isset($_GET['pval']) && $_GET['pval'] != '') { 
         $pval = $_GET['pval'];
@@ -68,7 +71,7 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
     if (isset($_GET['columnschoice']) && $_GET['columnschoice'] != '') { 
         $columns = $_GET['columnschoice'];
         $all_data['columns'] = array();
-        $values = array_values($columns);
+        $values = array_values((array) $columns);
         $output = join(',', $values);
         $all_data['columns'] = $output;
     }
@@ -108,18 +111,18 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
         // CPG
         if (preg_match("/^cg\d+$/", $entry, $output)) {
             $value = $output[0];
-            array_push($all_data['cpgs'],$value); 
-          
+            $all_data['cpgs'][] = $value;
+
         }
         // RSID
         if (preg_match("/^rs\d+$/", $entry, $output) || preg_match("/^chr\d+:\d+:\w$/", $entry, $output)) {
              $value = $output[0];
-             array_push($all_data['rsids'],$value); 
+             $all_data['rsids'][] = $value;
         }
         // SNP
         if (preg_match("/^chr(\d.*)\:(\d.*)\:(\w{2,})$/", $entry, $output)) {
             $value = $output[0];
-            array_push($all_data['snps'],$value);                                                                    
+            $all_data['snps'][] = $value;
         }
         // CPG/SNP Range
         if (preg_match("/^(cpg|snp)\:((\d+)\:(\d+)\-(\d+))$/", $entry, $output)) {
@@ -141,8 +144,8 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
     $data_string = json_encode($all_data);
 
     if ( $assoc_meta == true ) {
-        $qdata =  json_decode(CallApi('GET', $url),true);    
-        $json_data = $qdata['assoc_meta'];    
+        $qdata =  json_decode(CallApi('GET', $url),true);
+        $json_data = $qdata['assoc_meta'] ?? null;
     } elseif ( $info == true) {
         $qdata =  json_decode(CallApi('GET', $url),true);    
         $json_data = $qdata;    
@@ -151,6 +154,11 @@ if (isset($_GET['query']) && $_GET['query'] != '') {
         $json_data = $qdata;
     }
 
+    // PHP 8 throws a TypeError from sizeof() on a non-array, e.g. when the API
+    // call fails or returns invalid JSON, so fall back to an empty result set
+    if (!is_array($json_data)) {
+        $json_data = array();
+    }
     $returned_records = sizeof($json_data);
     $returned_json = json_encode(array( 'draw' => '1', 'recordsTotal' => $returned_records, 'recordsFiltered' => $returned_records, 'data' => $json_data));
 

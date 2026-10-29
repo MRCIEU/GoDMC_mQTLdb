@@ -1,6 +1,5 @@
 <?php 
 include 'header.php';
-ini_set("auto_detect_line_endings", true);
 
 
 if (isset($_GET['cpg']) && $_GET['cpg'] != '') {
@@ -14,11 +13,14 @@ if (isset($_GET['cpg']) && $_GET['cpg'] != '') {
 
 // Get info on cgp
 
-$str = file_get_contents('http://api.godmc.org.uk/v0.1/info/cpg/'.$query);
-$json = json_decode($str, true); // decode the JSON into an associative array
-$chr = $json[0]['chr'];
-$start = intval($json[0]['pos']) - 500000;
-$end = intval($json[0]['pos']) + 500000;
+$json = null;
+if ($query != '') {
+	$str = file_get_contents('http://api.godmc.org.uk/v0.1/info/cpg/'.$query);
+	$json = json_decode((string) $str, true); // decode the JSON into an associative array
+}
+$chr = $json[0]['chr'] ?? '';
+$start = intval($json[0]['pos'] ?? 0) - 500000;
+$end = intval($json[0]['pos'] ?? 0) + 500000;
 if (intval($start) < 1) {
 	$start = 1;
 }

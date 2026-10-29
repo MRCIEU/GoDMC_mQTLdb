@@ -22,7 +22,7 @@ $data = json_decode($content,true);
 
 					<?php
 
-            			if (count($data)) {
+            			if (is_array($data) && count($data)) {
 					        // Open the list
 					        echo '<ul id="cohortlist">';
 
